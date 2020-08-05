@@ -39,13 +39,17 @@ if (array_key_exists("submit", $_POST)) {
             $error.="This email is already registered";
             echo $error;
         } else {
+            //hash password
+            $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
             //create new user
             $query="INSERT INTO `user` (`email`, `password`) VALUES ('"
             .mysqli_real_escape_string($link, $_POST["email"])
             ."','"
-            .mysqli_real_escape_string($link, $_POST["password"])
+            .mysqli_real_escape_string($link, $hash)
             ."')";
 
+            
             if(mysqli_query($link,$query)){
                 echo "Sign up successfully";
             } else {
