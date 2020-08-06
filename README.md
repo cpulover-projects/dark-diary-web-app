@@ -1,6 +1,6 @@
 # Issues
 - Cookie not set
-- Does not display PHP error on the browser
+- Could not display PHP errors on the browser properly
 
 # Notes - Tips
 - Create hidden fields in the forms to distinguish between signing up and signing in
