@@ -13,7 +13,7 @@ $query = "INSERT INTO `user` (`email`, `password`) VALUES ('"
 if (mysqli_query($link, $query)) {
     $_SESSION["id"] = mysqli_insert_id($link);
     if ($_POST["stayLoggedIn"] == "1") {
-        setcookie("id", 1, time() + 60*60, "/");
+        setcookie("id", $_SESSION["id"], time() + 60*60, "/");
     }
     header("Location: main-page.php");
 } else {

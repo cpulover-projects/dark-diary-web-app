@@ -2,6 +2,8 @@
 
 if (isset($_POST["submit"])) {
     $error = "";
+
+    //validate from input fields
     if (!$_POST["email"]) {
         $error .= "Email is required";
     }
@@ -15,15 +17,20 @@ if (isset($_POST["submit"])) {
 
     if ($error) {
         echo $error;
-    } else {
+    }
+    //validate from database data
+    else {
+        $query = "SELECT * FROM `user`";
+        $result = mysqli_query($link, $query);
         if ($_POST["signUp"]) {
             //authenticate the sign-up email not been registerd yet
             $emailExisted = false;
-            $query = "SELECT `email` FROM `user`";
-            if ($result = mysqli_query($link, $query)) {
+
+            if ($result) {
                 while ($row = mysqli_fetch_array($result)) {
                     if ($row["email"] == $_POST["email"]) {
                         $emailExisted = true;
+                        break;
                     }
                 }
             }
@@ -36,6 +43,29 @@ if (isset($_POST["submit"])) {
             }
         } else {
             //authenticate sign in account from database
+            $accountFound = false;
+            $accountId = "";
+            if ($result) {
+                while ($row = mysqli_fetch_array($result)) {
+                    if ($row["email"] == $_POST["email"] and password_verify($_POST["password"], $row["password"])) {
+                        $accountFound = true;
+                        $accountId = $row["id"];
+                        break;
+                    }
+                }
+            }
+
+            if (!$accountFound) {
+                $error .= "Email or password is wrong";
+                echo $error;
+            } else {
+                $_SESSION["id"] = $accountId;
+                if ($_POST["stayLoggedIn"] == "1") {
+
+                    setcookie("id", $_SESSION["id"], time() + 60 * 60, "/");
+                }
+                header("Location: main-page.php");
+            }
         }
     }
 }
