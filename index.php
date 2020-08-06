@@ -1,9 +1,9 @@
 <?php
 
 session_start();
-include "process/connect-database.php";
-include "process/logout.php";
-include "process/validate-input.php";
+include "services/connect-database.php";
+include "services/logout.php";
+include "services/validate-input.php";
 ?>
 
 <br>

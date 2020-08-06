@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include "process/connect-database.php";
+include "services/connect-database.php";
 if (isset($_COOKIE["id"])) {
     $_SESSION["id"] = $_COOKIE["id"];
     echo "Cookie set<br>";
@@ -23,11 +23,11 @@ $userId = $_SESSION["id"];
     <input type="text" name="title" id="title">
     <input type="text" name="content" id="content">
     <input type="date" name="date" id="date">
-    <input type="submit" name="submit" value="Add new note">
+    <input type="submit" name="addNote" value="Add new note">
 </form>
 
 <?php
-if (isset($_POST["submit"])) {
+if (isset($_POST["addNote"])) {
     $newTitle = mysqli_real_escape_string($link, $_POST["title"]);
     $newContent = mysqli_real_escape_string($link, $_POST["content"]);
     $newDate = mysqli_real_escape_string($link, $_POST["date"]);

@@ -39,7 +39,7 @@ if (isset($_POST["submit"])) {
                 $error .= "This email is already registered";
                 echo $error;
             } else {
-                include "process/create-user.php";
+                include "services/create-user.php";
             }
         } else {
             //authenticate sign in account from database
