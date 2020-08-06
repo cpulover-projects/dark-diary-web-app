@@ -1,10 +1,11 @@
 <?php
 session_start();
-if(array_key_exists("id", $_COOKIE)){
+if(isset($_COOKIE["id"])){
     $_SESSION["id"]=$_COOKIE["id"];
+    echo "Cookie set<br>";
 }
 
-if(array_key_exists("id",$_SESSION)){
+if(isset($_SESSION["id"])){
     echo $_SESSION["id"];
     echo "<br>Logged in <br><a href='index.php?logout=1'>Log out</a>";
 } else {
