@@ -12,11 +12,11 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="resources/css/style.css">
 
-    <title>The Dark Diary</title>
+    <title>The Dark Diary 1</title>
 
     <style>
         html {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(resources/images/bg.jpg) no-repeat center center fixed;
+            /* background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(resources/images/bg.jpg) no-repeat center center fixed; */
         }
     </style>
 </head>

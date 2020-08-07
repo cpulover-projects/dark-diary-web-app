@@ -20,7 +20,7 @@ $(".list-group-item").hover(function () {
 $(".list-group-item").mouseleave(function () {
     $(this).attr('style', function (i, s) {
         return (s || '') +
-            'background-color: white !important;'
+            'background-color: #F8F9FA !important;'
     });
 })
 

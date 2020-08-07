@@ -2,6 +2,8 @@
 - Cookie not set
 - Could not display PHP errors on the browser properly
 - Could not link images in CSS from other directories
+- Frontend: right topbar
+- Limit content for popover
 
 # Notes - Tips
 - Create hidden fields in the forms to distinguish between signing up and signing in

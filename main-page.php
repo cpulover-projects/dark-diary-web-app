@@ -16,32 +16,44 @@ $userId = $_SESSION["id"];
 
 ?>
 
-<!-- Create note -->
-<!-- <form method="post">
-    <input type="text" name="title" id="title">
-    <input type="text" name="content" id="content">
-    <input type="date" name="date" id="date">
-    <input type="submit" name="addNote" value="Add new note">
-</form> -->
-
-
 <?php
-// if (isset($_POST["addNote"])) {
-//     $newTitle = mysqli_real_escape_string($link, $_POST["title"]);
-//     $newContent = mysqli_real_escape_string($link, $_POST["content"]);
-//     $newDate = mysqli_real_escape_string($link, $_POST["date"]);
+if (isset($_POST["addNote"])) {
+    $newTitle = mysqli_real_escape_string($link, $_POST["title"]);
+    $newContent = mysqli_real_escape_string($link, $_POST["content"]);
+    $newDate = mysqli_real_escape_string($link, $_POST["date"]);
 
-//     $query = "INSERT INTO note (`title`, `content`, `date`, `userId`) VALUES ('"
-//         . $newTitle . "','"
-//         . $newContent . "','"
-//         . $newDate . "','"
-//         . $userId . "')";
-//     mysqli_query($link,$query);
-// }
+    $query = "INSERT INTO note (`title`, `content`, `date`, `userId`) VALUES ('"
+        . $newTitle . "','"
+        . $newContent . "','"
+        . $newDate . "','"
+        . $userId . "')";
+    mysqli_query($link,$query);
+}
 ?>
 
-
 <?php include "sections/head.php";?>
+<style>
+  html {
+    background: none;
+  }
+
+  .form-control {
+  border: 0 !important;
+  /* border-bottom: gray 1px solid !important; */
+  border-radius: 0;
+  /* background-color: rgb(215, 215, 215) !important; */
+  background-color: white !important;
+}
+#title {
+  font-size: 25px;
+  font-weight: bold;
+}
+.form-group {
+  margin-top: 5px;
+}
+</style>
+
+
 <div class="d-flex" id="wrapper">
 
   <!-- Sidebar -->
@@ -59,7 +71,7 @@ $result = mysqli_query($link, $query);
 if ($result) {
     while ($row = mysqli_fetch_array($result)) {
         echo
-            '<div class="list-group-item bg-light"  data-toggle="popover" data-trigger="hover" 
+            '<div class="list-group-item bg-light" data-toggle="popover" data-trigger="hover" 
             title="'.$row["title"].'" 
             data-content="'.$row["content"].'">
               <b>' . $row["title"] . '</b> <br>
@@ -76,9 +88,10 @@ if ($result) {
   <!-- Page Content -->
   <div id="page-content-wrapper">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-      <button class="btn btn-primary" id="menu-toggle">My notes</button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+      <button class="btn btn-danger" id="menu-toggle">My notes</button>
 
+      <!-- ??? -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -94,9 +107,21 @@ if ($result) {
     </nav>
 
     <div class="container-fluid">
-      
+      <!-- Create note -->
+      <form method="post">
+        <div class="form-group">
+          <input type="text" name="title" id="title" class="form-control bg-light" placeholder="Title">
+          <hr>
+          <input type="date" name="date" id="date" class="form-control bg-light">
+          <hr>
+          <textarea name="content" id="content" rows="16" placeholder="Content" class="form-control bg-light"></textarea>
+        </div>
+        
+        <button type="submit" name="addNote" class="btn btn-dark">Save</button>
+      </form>
 
     </div>
+
   </div>
   <!-- /#page-content-wrapper -->
 
