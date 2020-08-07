@@ -59,10 +59,12 @@ $result = mysqli_query($link, $query);
 if ($result) {
     while ($row = mysqli_fetch_array($result)) {
         echo
-            '<div class="list-group-item bg-light">
-      <b>' . $row["title"] . '</b> <br>
-      <i>' . $row["date"] . '</i>
-    </div>';
+            '<div class="list-group-item bg-light"  data-toggle="popover" data-trigger="hover" 
+            title="'.$row["title"].'" 
+            data-content="'.$row["content"].'">
+              <b>' . $row["title"] . '</b> <br>
+              <i>' . $row["date"] . '</i>
+            </div>';
     }
 }
 ?>
@@ -93,7 +95,7 @@ if ($result) {
 
     <div class="container-fluid">
       
-    
+
     </div>
   </div>
   <!-- /#page-content-wrapper -->

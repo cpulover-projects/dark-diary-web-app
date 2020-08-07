@@ -12,13 +12,18 @@ $("#menu-toggle").click(function (e) {
 $(".list-group-item").hover(function () {
     $(this).attr('style', function (i, s) {
         return (s || '') +
-            'background-color: grey !important;'
+            'background-color: lightgrey !important;'
     });
 })
 
+//TODO: refactor
 $(".list-group-item").mouseleave(function () {
     $(this).attr('style', function (i, s) {
         return (s || '') +
             'background-color: white !important;'
     });
 })
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+  });
