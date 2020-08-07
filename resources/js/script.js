@@ -62,9 +62,7 @@ $('#addNote').click(function(){
         method: "POST",
         url: "services/add-new-note.php"
     }).done(function (){
-        $("#title").val("");
-        $("#date").val("");
-        $("#content").val("");
+        ajaxLoadForm();
     })
 })
 
@@ -72,5 +70,7 @@ function ajaxLoadForm(){
     $.ajax({
         method: "POST",
         url: "services/load-form.php"
+    }).done(function (msg){
+       $(".container-fluid").html(msg);
     })
 }
