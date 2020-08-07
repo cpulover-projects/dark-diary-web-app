@@ -29,7 +29,7 @@ if (isset($_POST)) {
             . $userId . "')";
 
         if (mysqli_query($link, $insertQuery)) {
-            echo "Insert uccessfully";
+            // echo "Insert uccessfully";
             $_SESSION["currentNoteId"] = mysqli_insert_id($link);
         } else {
             echo "Failed to insert";
@@ -42,7 +42,7 @@ if (isset($_POST)) {
                         ."', `date` ='".$date
                         ."' WHERE id =".$_SESSION["currentNoteId"];
         if(mysqli_query($link, $updateQuery)){
-            echo "Update successfully";
+            // echo "Update successfully";
         } else{
             echo "Failed to update";
         };

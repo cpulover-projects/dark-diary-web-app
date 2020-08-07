@@ -33,6 +33,7 @@ if (isset($_POST["addNote"])) {
 ?>
 
 <?php include "sections/head.php";?>
+<!-- TODO: include external css not working -->
 <style>
   html {
     background: none;
@@ -50,7 +51,11 @@ if (isset($_POST["addNote"])) {
   font-weight: bold;
 }
 .form-group {
-  margin-top: 5px;
+  margin-top: 18px;
+}
+button.delete {
+  float: right;
+  /* color: white; */
 }
 </style>
 
@@ -72,11 +77,13 @@ $result = mysqli_query($link, $query);
 if ($result) {
     while ($row = mysqli_fetch_array($result)) {
         echo
-            '<div class="list-group-item bg-light" data-toggle="popover" data-trigger="hover" 
+            '<div class="list-group-item bg-light note" id='.$row["id"].
+            ' data-toggle="popover" data-trigger="hover" 
             title="'.$row["title"].'" 
             data-content="'.$row["content"].'">
               <b>' . $row["title"] . '</b> <br>
               <i>' . $row["date"] . '</i>
+              <button class="btn btn-danger delete">Delete</button>
             </div>';
     }
 }
@@ -90,7 +97,7 @@ if ($result) {
   <div id="page-content-wrapper">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-      <button class="btn btn-danger" id="menu-toggle">My notes</button>
+      <button class="btn btn-success" id="menu-toggle">My notes</button>
 
       <!-- ??? -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

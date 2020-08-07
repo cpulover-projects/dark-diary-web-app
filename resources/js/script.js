@@ -14,6 +14,7 @@ $(".list-group-item").hover(function () {
         return (s || '') +
             'background-color: lightgrey !important;'
     });
+    // alert($(this).attr("id"));
 })
 
 //TODO: refactor
@@ -28,7 +29,7 @@ $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
 });
 
-$('input, textarea').bind('input propertychange', function () {
+$('#content, #title, #date').bind('input propertychange', function () {
     $.ajax({
         method: "POST",
         url: "services/update-note.php",
@@ -38,8 +39,20 @@ $('input, textarea').bind('input propertychange', function () {
             content: $("#content").val()
         }
     }).done(function (msg) {
-        alert("Save: "+msg);
+        // alert("Save: "+msg);
     }).fail(function () {
         console.error("Could not save note automatically");
     });    
 });
+
+$('button.delete').click(function (){
+    $(this).parent().css("display", "none")
+    alert($(this).parent().attr("id"));
+    $.ajax({
+        method: "POST",
+        url: "services/delete-note.php",
+        data: {
+            noteId:  $(this).parent().attr("id")
+        }
+    })
+})
