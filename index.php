@@ -64,4 +64,4 @@ include "services/validate-input.php";
             Don't have an account? <a class="toggleForms text-primary"> Sign up</a>
         </div>
     </div>
-    <?php include "sections/script-entries.php";
+    <?php include "sections/script-entries.php";?>
