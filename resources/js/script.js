@@ -47,7 +47,7 @@ $('#content, #title, #date').bind('input propertychange', function () {
 
 $('button.delete').click(function (){
     $(this).parent().css("display", "none")
-    alert($(this).parent().attr("id"));
+    // alert($(this).parent().attr("id"));
     $.ajax({
         method: "POST",
         url: "services/delete-note.php",
@@ -56,3 +56,21 @@ $('button.delete').click(function (){
         }
     })
 })
+
+$('#addNote').click(function(){
+    $.ajax({
+        method: "POST",
+        url: "services/add-new-note.php"
+    }).done(function (){
+        $("#title").val("");
+        $("#date").val("");
+        $("#content").val("");
+    })
+})
+
+function ajaxLoadForm(){
+    $.ajax({
+        method: "POST",
+        url: "services/load-form.php"
+    })
+}

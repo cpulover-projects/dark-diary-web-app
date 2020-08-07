@@ -10,7 +10,16 @@ if (isset($_COOKIE["id"])) {
 if (!isset($_SESSION["id"])) {
     header("Location: index.php");
 }
+
+if ($_SESSION["currentNoteId"]) {
+    $query = "SELECT * FROM note WHERE id=" . $_SESSION["currentNoteId"];
+    $currentNote = mysqli_fetch_array(mysqli_query($link, $query));
+} else {
+  $currentNote = null;
+}
+
 $userId = $_SESSION["id"];
+
 
 ?>
 
@@ -20,15 +29,15 @@ if (isset($_POST["addNote"])) {
     $content = mysqli_real_escape_string($link, $_POST["content"]);
     $date = mysqli_real_escape_string($link, $_POST["date"]);
 
-
     $query = "INSERT INTO note (`title`, `content`, `date`, `userId`) VALUES ('"
         . $title . "','"
         . $content . "','"
         . $date . "','"
         . $userId . "')";
-    if(mysqli_query($link,$query)){
-      $_SESSION["currentNoteId"]=false;
-    };
+    if (mysqli_query($link, $query)) {
+        $_SESSION["currentNoteId"] = false;
+    }
+    ;
 }
 ?>
 
@@ -40,23 +49,26 @@ if (isset($_POST["addNote"])) {
   }
 
   .form-control {
-  border: 0 !important;
-  /* border-bottom: gray 1px solid !important; */
-  border-radius: 0;
-  /* background-color: rgb(215, 215, 215) !important; */
-  background-color: white !important;
-}
-#title {
-  font-size: 25px;
-  font-weight: bold;
-}
-.form-group {
-  margin-top: 18px;
-}
-button.delete {
-  float: right;
-  /* color: white; */
-}
+    border: 0 !important;
+    /* border-bottom: gray 1px solid !important; */
+    border-radius: 0;
+    /* background-color: rgb(215, 215, 215) !important; */
+    background-color: white !important;
+  }
+
+  #title {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .form-group {
+    margin-top: 18px;
+  }
+
+  button.delete {
+    float: right;
+    /* color: white; */
+  }
 </style>
 
 
@@ -77,10 +89,10 @@ $result = mysqli_query($link, $query);
 if ($result) {
     while ($row = mysqli_fetch_array($result)) {
         echo
-            '<div class="list-group-item bg-light note" id='.$row["id"].
-            ' data-toggle="popover" data-trigger="hover" 
-            title="'.$row["title"].'" 
-            data-content="'.$row["content"].'">
+            '<div class="list-group-item bg-light note" id=' . $row["id"] .
+            ' data-toggle="popover" data-trigger="hover"
+            title="' . $row["title"] . '"
+            data-content="' . $row["content"] . '">
               <b>' . $row["title"] . '</b> <br>
               <i>' . $row["date"] . '</i>
               <button class="btn btn-danger delete">Delete</button>
@@ -97,7 +109,8 @@ if ($result) {
   <div id="page-content-wrapper">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-      <button class="btn btn-success" id="menu-toggle">My notes</button>
+      <button class="btn btn-success mr-2" id="menu-toggle">My notes</button>
+      <button class="btn btn-success" id="addNote">Add note</button>
 
       <!-- ??? -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -115,20 +128,8 @@ if ($result) {
     </nav>
 
     <div class="container-fluid">
-      <!-- Create note -->
-      <form method="post">
-        <div class="form-group">
-          <input type="text" name="title" id="title" class="form-control bg-light" placeholder="Title">
-          <hr>
-          <input type="date" name="date" id="date" class="form-control bg-light">
-          <hr>
-          <textarea name="content" id="content" rows="16" placeholder="Content" class="form-control bg-light"></textarea>
-          <hr>
-        </div>
-        
-        <button type="submit" name="addNote" class="btn btn-dark">Save</button>
-        
-      </form>
+      <!-- LOAD FORM -->
+     <?php include "services/load-form.php"; ?>
 
     </div>
 
