@@ -9,25 +9,26 @@ if (isset($_COOKIE["id"])) {
 
 if (!isset($_SESSION["id"])) {
     header("Location: index.php");
-    // echo "<h3><a href='index.php?logout=1'>Log out</a></h3><br>";
 }
-
 $userId = $_SESSION["id"];
 
 ?>
 
 <?php
 if (isset($_POST["addNote"])) {
-    $newTitle = mysqli_real_escape_string($link, $_POST["title"]);
-    $newContent = mysqli_real_escape_string($link, $_POST["content"]);
-    $newDate = mysqli_real_escape_string($link, $_POST["date"]);
+    $title = mysqli_real_escape_string($link, $_POST["title"]);
+    $content = mysqli_real_escape_string($link, $_POST["content"]);
+    $date = mysqli_real_escape_string($link, $_POST["date"]);
+
 
     $query = "INSERT INTO note (`title`, `content`, `date`, `userId`) VALUES ('"
-        . $newTitle . "','"
-        . $newContent . "','"
-        . $newDate . "','"
+        . $title . "','"
+        . $content . "','"
+        . $date . "','"
         . $userId . "')";
-    mysqli_query($link,$query);
+    if(mysqli_query($link,$query)){
+      $_SESSION["currentNoteId"]=false;
+    };
 }
 ?>
 
@@ -115,9 +116,11 @@ if ($result) {
           <input type="date" name="date" id="date" class="form-control bg-light">
           <hr>
           <textarea name="content" id="content" rows="16" placeholder="Content" class="form-control bg-light"></textarea>
+          <hr>
         </div>
         
         <button type="submit" name="addNote" class="btn btn-dark">Save</button>
+        
       </form>
 
     </div>

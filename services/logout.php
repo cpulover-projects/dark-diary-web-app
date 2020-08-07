@@ -11,3 +11,4 @@ if (isset($_GET["logout"])) {
 } elseif (isset($_SESSION["id"]) or isset($_COOKIE["id"])) {
     header("Location: main-page.php");
 }
+

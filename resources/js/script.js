@@ -24,6 +24,22 @@ $(".list-group-item").mouseleave(function () {
     });
 })
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('[data-toggle="popover"]').popover();
-  });
+});
+
+$('input, textarea').bind('input propertychange', function () {
+    $.ajax({
+        method: "POST",
+        url: "services/update-note.php",
+        data: {
+            title: $("#title").val(),
+            date: $("#date").val(),
+            content: $("#content").val()
+        }
+    }).done(function (msg) {
+        alert("Save: "+msg);
+    }).fail(function () {
+        console.error("Could not save note automatically");
+    });    
+});
