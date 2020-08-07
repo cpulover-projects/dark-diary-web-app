@@ -17,6 +17,13 @@ $(".list-group-item").hover(function () {
     // alert($(this).attr("id"));
 })
 
+$(document).on('click', '.list-group-item', function() {
+    $(this).attr('style', function (i, s) {
+        return (s || '') +
+            'background-color: lightgrey !important;'
+    });
+});
+
 //TODO: refactor
 $(".list-group-item").mouseleave(function () {
     $(this).attr('style', function (i, s) {
@@ -25,9 +32,21 @@ $(".list-group-item").mouseleave(function () {
     });
 })
 
+$(document).on('click', '.list-group-item', function() {
+    $(this).attr('style', function (i, s) {
+        return (s || '') +
+            'background-color: #F8F9FA !important;'
+    });
+});
+
+
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
 });
+
+$(document).ajaxComplete(function() {
+    $('[data-toggle="popover"]').popover();
+  });
 
 $('#content, #title, #date').bind('input propertychange', function () {
     $.ajax({
@@ -39,11 +58,22 @@ $('#content, #title, #date').bind('input propertychange', function () {
             content: $("#content").val()
         }
     }).done(function (msg) {
-        // alert("Save: "+msg);
+        ajaxLoadSidebarNote();
     }).fail(function () {
         console.error("Could not save note automatically");
     });    
 });
+
+
+function ajaxLoadSidebarNote(){
+    $.ajax({
+        method: "POST",
+        url: "services/load-sidebar-note.php"
+    }).done(function(msg){
+        // alert(msg);
+        $(".list-group").html(msg);
+    })
+}
 
 $('button.delete').click(function (){
     $(this).parent().css("display", "none")
@@ -57,12 +87,28 @@ $('button.delete').click(function (){
     })
 })
 
+$(document).on('click', 'button.delete', function() {
+    $(this).parent().css("display", "none")
+    // alert($(this).parent().attr("id"));
+    $.ajax({
+        method: "POST",
+        url: "services/delete-note.php",
+        data: {
+            noteId:  $(this).parent().attr("id")
+        }
+    })
+});
+
 $('#addNote').click(function(){
     $.ajax({
         method: "POST",
         url: "services/add-new-note.php"
     }).done(function (){
-        ajaxLoadForm();
+        $("#title").val("");
+        $("#date").val("");
+        $("#content").val("");
+
+        //ajaxLoadForm();
     })
 })
 
@@ -74,3 +120,4 @@ function ajaxLoadForm(){
        $(".container-fluid").html(msg);
     })
 }
+

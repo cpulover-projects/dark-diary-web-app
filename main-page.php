@@ -42,6 +42,7 @@ if (isset($_POST["addNote"])) {
 ?>
 
 <?php include "sections/head.php";?>
+
 <!-- TODO: include external css not working -->
 <style>
   html {
@@ -81,26 +82,7 @@ if (isset($_POST["addNote"])) {
     </div>
     <div class="list-group list-group-flush">
       <!-- list-group-item-action -->
-
-      <?php
-$query = "SELECT * FROM note WHERE userId=" . $userId;
-$result = mysqli_query($link, $query);
-
-if ($result) {
-    while ($row = mysqli_fetch_array($result)) {
-        echo
-            '<div class="list-group-item bg-light note" id=' . $row["id"] .
-            ' data-toggle="popover" data-trigger="hover"
-            title="' . $row["title"] . '"
-            data-content="' . $row["content"] . '">
-              <b>' . $row["title"] . '</b> <br>
-              <i>' . $row["date"] . '</i>
-              <button class="btn btn-danger delete">Delete</button>
-            </div>';
-    }
-}
-?>
-
+      <?php include "services/load-sidebar-note.php"?>
     </div>
   </div>
   <!-- /#sidebar-wrapper -->
@@ -127,9 +109,11 @@ if ($result) {
       </div>
     </nav>
 
+    <script src="resources/js/script.js"></script>
+
     <div class="container-fluid">
       <!-- LOAD FORM -->
-     <?php include "services/load-form.php"; ?>
+      <?php include "services/load-form.php"; ?>
 
     </div>
 
