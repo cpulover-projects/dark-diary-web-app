@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 //hash password
 $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
@@ -12,8 +13,12 @@ $query = "INSERT INTO `user` (`email`, `password`) VALUES ('"
 
 if (mysqli_query($link, $query)) {
     $_SESSION["id"] = mysqli_insert_id($link);
-    if ($_POST["stayLoggedIn"] == "1") {
-        setcookie("id", $_SESSION["id"], time() + 60*60, "/");
+    if ($_POST["stayLoggedIn"]) {
+        setcookie("id", $_SESSION["id"], time() + 60*60*24*30, "/");
+        echo($_SESSION["id"]);
+        echo "<h1> cookie set: ".$_COOKIE["id"]."</h1>";
+    } else {
+        echo "<h1> cookie not set: ".$_COOKIE["id"]."</h1>";
     }
     header("Location: main-page.php");
 } else {

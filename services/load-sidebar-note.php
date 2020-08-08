@@ -50,7 +50,8 @@ if ($result) {
          <div class="row p-0 m-0">
             <div class="col-9 p-0 m-0">
             <b>' . $titleSummary . '</b> <br>
-            <i>' . $row["date"] . '</i>
+            <i class="fa fa-calendar"></i>
+            <i id="fullDate">' . $row["date"] . '</i>
             </div>
 
             <div class="hidden" id="fullTitle">' . $row["title"] . '</div>

@@ -52,7 +52,7 @@ $(document).on('click', '.list-group-item', function(e) {
     $('.list-group-item').removeClass("selected");
     $(this).addClass("selected");
     var noteTitle = $(this).find('#fullTitle').html();
-    var noteDate = $(this).find('i').html();
+    var noteDate = $(this).find('#fullDate').html();
     var noteContent = $(this).find('#fullContent').html();
     // alert(noteTitle);
     $("#title").val(noteTitle);

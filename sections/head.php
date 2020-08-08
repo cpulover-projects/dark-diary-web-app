@@ -14,7 +14,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="resources/css/style.css?<?php echo time(); ?>">
 
-    <title>The Dark Diary 1</title>
+    <title>The Dark Diary</title>
 
 </head>
 

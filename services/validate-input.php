@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 if (isset($_POST["submit"])) {
     $error = "";
 
@@ -60,9 +61,9 @@ if (isset($_POST["submit"])) {
                 echo $error;
             } else {
                 $_SESSION["id"] = $accountId;
-                if ($_POST["stayLoggedIn"] == "1") {
+                if ($_POST["stayLoggedIn"]) {
 
-                    setcookie("id", $_SESSION["id"], time() + 60 * 60*60, "/");
+                    setcookie("id", $_SESSION["id"], time() + 60 * 60*60*24*30, "/");
                 }
                 header("Location: main-page.php");
             }

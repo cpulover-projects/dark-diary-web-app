@@ -42,16 +42,15 @@ html {
   }
 
 
-.navbar {
+#sidebar-wrapper {
   /* background-color: aqua !important; */
+  border-right: gray 1px solid !important;
 }
-
-
 
 /* SIDE BAR */
 .list-group-item {
   /* background-color: black !important; */
-  width: 16.6rem;
+  width: 16.5rem;
   border-left: 0 !important;
 
 }
@@ -63,10 +62,18 @@ html {
   /* background-color: aqua !important; */
 }
 
-
+.fa-calendar {
+  margin-top: 10px;
+}
 
 #search {
   height: 28px;
+  /* font-size: 16px; */
+}
+
+.sidebar-heading{
+  border-bottom: gray 1px solid !important;
+
 }
   #wrapper {
     overflow-x: hidden;

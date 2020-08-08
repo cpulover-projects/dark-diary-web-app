@@ -3,11 +3,9 @@
   - Right topbar
   - Mobile responsive
   - Fixed sidebar
-- Cookie not set
 - Could not display PHP errors on the browser properly
 - Could not link images in CSS from other directories
-- Refresh form when delete current note
-- Lost data of current note when reloading page
+- Prevent parsing html code
 
 # Notes - Tips
 - Create hidden fields in the forms to distinguish between signing up and signing in
@@ -16,3 +14,4 @@
 - Add important style using jQuery: ```attr('style', function(i,s) { return (s || '') + 'background-color: aquamarine !important;' });```
 - Select child element of "this" with jQuery: ```$(this).find('<element>')```
 - Use ```event.stopPropagation()``` to avoid triggering parent's event when triggering child's event
+

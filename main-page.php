@@ -4,7 +4,7 @@ session_start();
 include "services/connect-database.php";
 if (isset($_COOKIE["id"])) {
     $_SESSION["id"] = $_COOKIE["id"];
-    echo "Cookie set<br>";
+    // echo "Cookie set<br>";
 }
 
 if (!isset($_SESSION["id"])) {
