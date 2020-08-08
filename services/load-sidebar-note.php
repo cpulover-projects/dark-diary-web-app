@@ -36,33 +36,23 @@ if ($result) {
         } else {
             $contentSummary = $row["content"];
         }
+
+        $selectState =" ";
         if ($row["id"] == $_SESSION["currentNoteId"]) {
-            echo
-                '<div class="list-group-item bg-light note seleted" id=' . $row["id"] .
-                ' data-toggle="popover" data-trigger="hover"
-             title="' . $row["title"] . '"
-             data-content="' . $contentSummary . '">
-              <b>' . $titleSummary . '</b> <br>
-              <i>' . $row["date"] . '</i>
+            $selectState = " selected";}
 
-              <div class="hidden" id="fullTitle">' . $row["title"] . '</div>
-              <div class="hidden" id="fullContent">' . $row["content"] . '</div>
-              <button class="btn btn-danger delete">Delete</button>
-            </div>';} else {
-            echo
-                '<div class="list-group-item bg-light note" id=' . $row["id"] .
-                ' data-toggle="popover" data-trigger="hover"
-                 title="' . $row["title"] . '"
-                 data-content="' . $contentSummary . '">
-                  <b>' . $titleSummary . '</b> <br>
-                  <i>' . $row["date"] . '</i>
+         echo
+            '<div class="list-group-item bg-light note'.$selectState.'" id=' . $row["id"] .
+            ' data-toggle="popover" data-trigger="hover"
+         title="' . $row["title"] . '"
+         data-content="' . $contentSummary . '">
+          <b>' . $titleSummary . '</b> <br>
+          <i>' . $row["date"] . '</i>
 
-                  <div class="hidden" id="fullTitle">' . $row["title"] . '</div>
-                  <div class="hidden" id="fullContent">' . $row["content"] . '</div>
-                  <button class="btn btn-danger delete">Delete</button>
-                </div>';
-
-        }
+          <div class="hidden" id="fullTitle">' . $row["title"] . '</div>
+          <div class="hidden" id="fullContent">' . $row["content"] . '</div>
+          <button class="btn btn-danger delete">Delete</button>
+        </div>';
     }
 }
 ?>

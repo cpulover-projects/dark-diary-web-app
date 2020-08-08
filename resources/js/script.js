@@ -40,8 +40,8 @@ $(document).on('mouseleave', '.list-group-item', function() {
 });
 
 $(document).on('click', '.list-group-item', function() {
-    $('.list-group-item').removeClass("seleted");
-    $(this).addClass("seleted");
+    $('.list-group-item').removeClass("selected");
+    $(this).addClass("selected");
     var noteTitle = $(this).find('#fullTitle').html();
     var noteDate = $(this).find('i').html();
     var noteContent = $(this).find('#fullContent').html();
