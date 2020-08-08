@@ -20,14 +20,28 @@ $query = "SELECT * FROM note WHERE userId=" . $userId
 
 $result = mysqli_query($link, $query);
 
+$maxTitleLetters = 15;
+$maxContentLetters = 400;
+
 if ($result) {
     while ($row = mysqli_fetch_array($result)) {
+        if (strlen($row["title"]) > $maxTitleLetters) {
+            $titleSummary = substr($row["title"], 0, $maxTitleLetters) . "...";
+        } else {
+            $titleSummary = $row["title"];
+        }
+
+        if (strlen($row["content"]) > $maxContentLetters) {
+            $contentSummary = substr($row["content"], 0, $maxContentLetters) . "...";
+        } else {
+            $contentSummary = $row["content"];
+        }
         echo
             '<div class="list-group-item bg-light note" id=' . $row["id"] .
             ' data-toggle="popover" data-trigger="hover"
             title="' . $row["title"] . '"
-            data-content="' . $row["content"] . '">
-              <b>' . $row["title"] . '</b> <br>
+            data-content="' . $contentSummary . '">
+              <b>' . $titleSummary . '</b> <br>
               <i>' . $row["date"] . '</i>
               <button class="btn btn-danger delete">Delete</button>
             </div>';
