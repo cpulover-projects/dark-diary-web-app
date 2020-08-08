@@ -10,7 +10,7 @@
 </script>
 
 <!-- Custom scripts -->
-<script src="resources/js/script.js"></script>
+<script src="resources/js/script.js?<?php echo time(); ?>"></script>
 
 </body>
 

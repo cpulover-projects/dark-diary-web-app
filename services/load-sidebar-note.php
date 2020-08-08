@@ -20,7 +20,7 @@ $query = "SELECT * FROM note WHERE userId=" . $userId
 
 $result = mysqli_query($link, $query);
 
-$maxTitleLetters = 15;
+$maxTitleLetters = 18;
 $maxContentLetters = 400;
 
 if ($result) {
@@ -46,12 +46,29 @@ if ($result) {
             ' data-toggle="popover" data-trigger="hover"
          title="' . $row["title"] . '"
          data-content="' . $contentSummary . '">
-          <b>' . $titleSummary . '</b> <br>
-          <i>' . $row["date"] . '</i>
 
-          <div class="hidden" id="fullTitle">' . $row["title"] . '</div>
-          <div class="hidden" id="fullContent">' . $row["content"] . '</div>
-          <button class="btn btn-danger delete">Delete</button>
+         <div class="row p-0 m-0">
+            <div class="col-9 p-0 m-0">
+            <b>' . $titleSummary . '</b> <br>
+            <i>' . $row["date"] . '</i>
+            </div>
+
+            <div class="hidden" id="fullTitle">' . $row["title"] . '</div>
+            <div class="hidden" id="fullContent">' . $row["content"] . '</div>
+
+            <div class="col-3 p-0 m-0">
+            <div class="row p-0 m-0 justify-content-end">
+            <button class="btn btn-dark star"><i class="fa fa-star"></i></button>
+            </div>
+
+            <div class="row p-0 m-0 justify-content-end">
+            <button class="btn btn-dark delete"><i class="fa fa-trash"></i></button>
+            </div>
+
+            </div>
+
+        </div>
+
         </div>';
     }
 }

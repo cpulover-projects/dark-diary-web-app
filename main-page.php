@@ -44,8 +44,13 @@ $userId = $_SESSION["id"];
     margin-top: 18px;
   }
 
-  button.delete {
-    float: right;
+  button.delete, button.star {
+    width: 40px;
+    /* border-radius: 100%; */
+    margin-bottom: 2px;
+    position: relative;
+    left: 10px;
+    /* float: right; */
     /* color: white; */
   }
 </style>
@@ -69,7 +74,7 @@ $userId = $_SESSION["id"];
   <div id="page-content-wrapper">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-      <button class="btn btn-success mr-2" id="menu-toggle">My notes</button>
+      <button class="btn btn-success mr-1" id="menu-toggle">My notes</button>
       <button class="btn btn-success" id="addNote">New note</button>
 
       <!-- ??? -->

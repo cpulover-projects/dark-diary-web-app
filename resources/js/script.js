@@ -10,6 +10,7 @@ $("#menu-toggle").click(function (e) {
 });
 
 $(".list-group-item").hover(function () {
+    
     $(this).attr('style', function (i, s) {
         return (s || '') +
             'background-color: lightgrey !important;'
@@ -18,6 +19,8 @@ $(".list-group-item").hover(function () {
 });
 
 $(document).on('mouseover', '.list-group-item', function() {
+    
+
     $(this).attr('style', function (i, s) {
         return (s || '') +
             'background-color: lightgrey !important;'
@@ -41,7 +44,11 @@ $(document).on('mouseleave', '.list-group-item', function() {
 
 
 $(document).on('click', '.list-group-item', function(e) {
-    if(e.target !== e.currentTarget) return;
+    //target only on this element, not on the childrens
+    // if(e.target !== e.currentTarget) return;
+
+    // if(e.target == $("#delete")) return;
+
     $('.list-group-item').removeClass("selected");
     $(this).addClass("selected");
     var noteTitle = $(this).find('#fullTitle').html();
@@ -125,15 +132,16 @@ function ajaxLoadSidebarNote(){
 
 
 
-$(document).on('click', 'button.delete', function() {
+$(document).on('click', 'button.delete', function(e) {
+    e.stopPropagation();
 
-    $(this).parent().css("display", "none")
+    $(this).parent().parent().parent().parent().css("display", "none");
     // alert($(this).parent().attr("id"));
     $.ajax({
         method: "POST",
         url: "services/delete-note.php",
         data: {
-            noteId:  $(this).parent().attr("id")
+            noteId:  $(this).parent().parent().parent().parent().attr("id")
         }
     }).done(function (msg){
         //if the deleted note is the current note => reset form
