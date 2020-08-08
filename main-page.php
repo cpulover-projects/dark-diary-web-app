@@ -27,6 +27,12 @@ $userId = $_SESSION["id"];
     display: none;
   }
 
+  .selected {
+    border-left: black 2px solid !important;
+    background-color: aqua !important;
+    margin-bottom: 200px ;
+  }
+
   .form-control {
     border: 0 !important;
     /* border-bottom: gray 1px solid !important; */

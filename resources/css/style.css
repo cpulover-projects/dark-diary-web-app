@@ -19,9 +19,6 @@ html {
     width: 500px;
   }
 
-  .hidden {
-    display: none;
-  }
 
 .display-3 {
     font-weight: normal;
@@ -55,6 +52,14 @@ html {
 .list-group-item {
   /* background-color: black !important; */
   width: 16.6rem;
+  border-left: 0 !important;
+
+}
+
+.seleted{
+  border-left: gray 7px solid !important;
+
+  /* background-color: aqua !important; */
 }
 
 
