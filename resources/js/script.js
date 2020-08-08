@@ -17,7 +17,7 @@ $(".list-group-item").hover(function () {
     // alert($(this).attr("id"));
 })
 
-$(document).on('click', '.list-group-item', function() {
+$(document).on('mouseover', '.list-group-item', function() {
     $(this).attr('style', function (i, s) {
         return (s || '') +
             'background-color: lightgrey !important;'
@@ -32,7 +32,7 @@ $(".list-group-item").mouseleave(function () {
     });
 })
 
-$(document).on('click', '.list-group-item', function() {
+$(document).on('mouseleave', '.list-group-item', function() {
     $(this).attr('style', function (i, s) {
         return (s || '') +
             'background-color: #F8F9FA !important;'
