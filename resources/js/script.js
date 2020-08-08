@@ -1,7 +1,7 @@
 $(".toggleForms").click(function () {
     $("#signInForm").toggle();
     $("#signUpForm").toggle();
-})
+});
 
 
 $("#menu-toggle").click(function (e) {
@@ -15,7 +15,7 @@ $(".list-group-item").hover(function () {
             'background-color: lightgrey !important;'
     });
     // alert($(this).attr("id"));
-})
+});
 
 $(document).on('mouseover', '.list-group-item', function() {
     $(this).attr('style', function (i, s) {
@@ -39,7 +39,9 @@ $(document).on('mouseleave', '.list-group-item', function() {
     });
 });
 
-$(document).on('click', '.list-group-item', function() {
+
+$(document).on('click', '.list-group-item', function(e) {
+    if(e.target !== e.currentTarget) return;
     $('.list-group-item').removeClass("selected");
     $(this).addClass("selected");
     var noteTitle = $(this).find('#fullTitle').html();
@@ -102,7 +104,7 @@ var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 
 return today = yyyy + '/' + mm + '/' + dd;
-}
+};
 
 $('#search').bind('input propertychange', function () {
     ajaxLoadSidebarNote();
@@ -119,9 +121,12 @@ function ajaxLoadSidebarNote(){
         // alert(msg);
         $(".list-group").html(msg);
     })
-}
+};
 
-$('button.delete').click(function (){
+
+
+$(document).on('click', 'button.delete', function() {
+
     $(this).parent().css("display", "none")
     // alert($(this).parent().attr("id"));
     $.ajax({
@@ -130,17 +135,12 @@ $('button.delete').click(function (){
         data: {
             noteId:  $(this).parent().attr("id")
         }
-    })
-})
-
-$(document).on('click', 'button.delete', function() {
-    $(this).parent().css("display", "none")
-    // alert($(this).parent().attr("id"));
-    $.ajax({
-        method: "POST",
-        url: "services/delete-note.php",
-        data: {
-            noteId:  $(this).parent().attr("id")
+    }).done(function (msg){
+        //if the deleted note is the current note => reset form
+        if(msg){
+        $("#title").val("");
+        $("#date").val("");
+        $("#content").val("");
         }
     })
 });

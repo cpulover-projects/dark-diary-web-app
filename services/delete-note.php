@@ -13,8 +13,19 @@ if (mysqli_connect_error()) {
     // echo "Connect to database successfully<br>";
 }
 
+// if ($_SESSION["currentNoteId"]){
+//     $_SESSION["currentNoteId"]=false;   
+// }
+
 if (isset($_POST)) {
     $query = "DELETE FROM note WHERE id=".$_POST["noteId"];
     mysqli_query($link,$query);
 }
+
+if ($_SESSION["currentNoteId"]==$_POST["noteId"]){
+    $_SESSION["currentNoteId"] = false;
+    echo true;
+} else {
+    echo false;
+};
 ?>
