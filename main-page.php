@@ -92,7 +92,7 @@ if (isset($_POST["addNote"])) {
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
       <button class="btn btn-success mr-2" id="menu-toggle">My notes</button>
-      <button class="btn btn-success" id="addNote">Add note</button>
+      <button class="btn btn-success" id="addNote">New note</button>
 
       <!-- ??? -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

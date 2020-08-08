@@ -49,20 +49,35 @@ $(document).ajaxComplete(function() {
   });
 
 $('#content, #title, #date').bind('input propertychange', function () {
+    var theDate = getCurrentDate();
+    if($("#date").val()){
+        var theDate = $("#date").val();
+    }
+
     $.ajax({
         method: "POST",
         url: "services/update-note.php",
         data: {
             title: $("#title").val(),
-            date: $("#date").val(),
+            date: theDate,//$("#date").val(),
             content: $("#content").val()
         }
     }).done(function (msg) {
         ajaxLoadSidebarNote();
     }).fail(function () {
         console.error("Could not save note automatically");
-    });    
+    });  
+    
 });
+
+function getCurrentDate(){
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+return today = yyyy + '/' + mm + '/' + dd;
+}
 
 $('#search').bind('input propertychange', function () {
     ajaxLoadSidebarNote();
