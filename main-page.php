@@ -11,34 +11,8 @@ if (!isset($_SESSION["id"])) {
     header("Location: index.php");
 }
 
-if ($_SESSION["currentNoteId"]) {
-    $query = "SELECT * FROM note WHERE id=" . $_SESSION["currentNoteId"];
-    $currentNote = mysqli_fetch_array(mysqli_query($link, $query));
-} else {
-  $currentNote = null;
-}
-
 $userId = $_SESSION["id"];
 
-
-?>
-
-<?php
-if (isset($_POST["addNote"])) {
-    $title = mysqli_real_escape_string($link, $_POST["title"]);
-    $content = mysqli_real_escape_string($link, $_POST["content"]);
-    $date = mysqli_real_escape_string($link, $_POST["date"]);
-
-    $query = "INSERT INTO note (`title`, `content`, `date`, `userId`) VALUES ('"
-        . $title . "','"
-        . $content . "','"
-        . $date . "','"
-        . $userId . "')";
-    if (mysqli_query($link, $query)) {
-        $_SESSION["currentNoteId"] = false;
-    }
-    ;
-}
 ?>
 
 <?php include "sections/head.php";?>
@@ -47,6 +21,10 @@ if (isset($_POST["addNote"])) {
 <style>
   html {
     background: none;
+  }
+
+  .hidden {
+    display: none;
   }
 
   .form-control {
@@ -113,7 +91,7 @@ if (isset($_POST["addNote"])) {
 
     <div class="container-fluid">
       <!-- LOAD FORM -->
-      <?php include "services/load-form.php"; ?>
+      <?php include "services/load-form.php";?>
 
     </div>
 

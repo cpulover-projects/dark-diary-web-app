@@ -11,11 +11,16 @@ html {
   }
 
   
+
   .container {
     color: white;
     text-align: center;
     margin-top: 8%;
     width: 500px;
+  }
+
+  .hidden {
+    display: none;
   }
 
 .display-3 {

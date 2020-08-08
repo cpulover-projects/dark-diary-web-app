@@ -39,6 +39,28 @@ $(document).on('mouseleave', '.list-group-item', function() {
     });
 });
 
+$(document).on('click', '.list-group-item', function() {
+    var noteTitle = $(this).find('#fullTitle').html();
+    var noteDate = $(this).find('i').html();
+    var noteContent = $(this).find('#fullContent').html();
+    // alert(noteTitle);
+    $("#title").val(noteTitle);
+    $("#date").val(noteDate);
+    $("#content").val(noteContent);
+    $.ajax({
+        method: "POST",
+        url: "services/update-note.php",
+        data: {
+            selectedNoteId: $(this).attr("id"),
+            title: noteTitle,
+            date: noteDate,
+            content: noteContent
+        }
+    }).done(function (msg){
+
+    })
+});
+
 
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
@@ -64,6 +86,7 @@ $('#content, #title, #date').bind('input propertychange', function () {
         }
     }).done(function (msg) {
         ajaxLoadSidebarNote();
+        // alert(msg);
     }).fail(function () {
         console.error("Could not save note automatically");
     });  
@@ -131,14 +154,5 @@ $('#addNote').click(function(){
 
         //ajaxLoadForm();
     })
-})
-
-function ajaxLoadForm(){
-    $.ajax({
-        method: "POST",
-        url: "services/load-form.php"
-    }).done(function (msg){
-       $(".container-fluid").html(msg);
-    })
-}
+});
 

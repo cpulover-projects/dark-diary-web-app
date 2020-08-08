@@ -21,6 +21,10 @@ if (isset($_POST)) {
 
     echo $title.$date.$content;
 
+    if($_POST["selectedNoteId"]){
+        $_SESSION["currentNoteId"]=$_POST["selectedNoteId"];
+    }
+
     if (!$_SESSION["currentNoteId"]) {
         $insertQuery = "INSERT INTO note (`title`, `content`, `date`, `userId`) VALUES ('"
             . $title . "','"
@@ -36,7 +40,7 @@ if (isset($_POST)) {
         }
         ;
     } else {
-        echo $_SESSION["currentNoteId"];
+        echo "current note: ".$_SESSION["currentNoteId"];
         $updateQuery = "UPDATE note SET `title` ='".$title
                         ."', `content` ='".$content
                         ."', `date` ='".$date

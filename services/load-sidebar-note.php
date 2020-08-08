@@ -39,10 +39,13 @@ if ($result) {
         echo
             '<div class="list-group-item bg-light note" id=' . $row["id"] .
             ' data-toggle="popover" data-trigger="hover"
-            title="' . $row["title"] . '"
-            data-content="' . $contentSummary . '">
+             title="' . $row["title"] . '"
+             data-content="' . $contentSummary . '">
               <b>' . $titleSummary . '</b> <br>
               <i>' . $row["date"] . '</i>
+
+              <div class="hidden" id="fullTitle">'.$row["title"].'</div>
+              <div class="hidden" id="fullContent">'.$row["content"].'</div>
               <button class="btn btn-danger delete">Delete</button>
             </div>';
     }
