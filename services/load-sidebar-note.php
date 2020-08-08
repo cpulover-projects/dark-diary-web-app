@@ -1,7 +1,8 @@
 
 <?php
 
-$userId = 14;
+session_start();
+$userId = $_SESSION["id"];
 //TODO: why $link from include not working???
 // include "./connect-database.php";
 
@@ -14,7 +15,9 @@ if (mysqli_connect_error()) {
     // echo "Connect to database successfully<br>";
 }
 
-$query = "SELECT * FROM note WHERE userId=" . $userId;
+$query = "SELECT * FROM note WHERE userId=" . $userId
+    . " AND `title` LIKE '%" . $_POST["searchKeyword"] . "%'";
+
 $result = mysqli_query($link, $query);
 
 if ($result) {

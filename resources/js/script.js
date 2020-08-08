@@ -64,11 +64,17 @@ $('#content, #title, #date').bind('input propertychange', function () {
     });    
 });
 
+$('#search').bind('input propertychange', function () {
+    ajaxLoadSidebarNote();
+});
 
 function ajaxLoadSidebarNote(){
     $.ajax({
         method: "POST",
-        url: "services/load-sidebar-note.php"
+        url: "services/load-sidebar-note.php",
+        data: {
+            searchKeyword: $("#search").val()
+        }    
     }).done(function(msg){
         // alert(msg);
         $(".list-group").html(msg);

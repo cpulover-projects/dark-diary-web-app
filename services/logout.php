@@ -8,6 +8,7 @@ if (isset($_GET["logout"])) {
         // echo $_SESSION["id"] . $_COOKIE["id"];
         $_COOKIE["id"] = "";
     }
+    $_SESSION["currentNoteId"]=false;
 } elseif (isset($_SESSION["id"]) or isset($_COOKIE["id"])) {
     header("Location: main-page.php");
 }

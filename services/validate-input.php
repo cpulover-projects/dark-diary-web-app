@@ -62,7 +62,7 @@ if (isset($_POST["submit"])) {
                 $_SESSION["id"] = $accountId;
                 if ($_POST["stayLoggedIn"] == "1") {
 
-                    setcookie("id", $_SESSION["id"], time() + 60 * 60, "/");
+                    setcookie("id", $_SESSION["id"], time() + 60 * 60*60, "/");
                 }
                 header("Location: main-page.php");
             }
