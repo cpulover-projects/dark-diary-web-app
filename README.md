@@ -35,3 +35,5 @@
 //code starts from here...
 ?>
 ```
+- Use absolute path to include php file in parent directory in webserver: ```include "/home/sites/11a/2/2148d4b421/public_html/the-dark-diary/properties.php"; //import database properties from secured file```
+- Select elements other than this: ```$("<class>").not(this)```
