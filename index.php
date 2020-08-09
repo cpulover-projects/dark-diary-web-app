@@ -1,6 +1,9 @@
 <?php
 
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 include "services/connect-database.php";
 include "services/logout.php";
 include "services/validate-input.php";

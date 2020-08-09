@@ -1,22 +1,15 @@
 
 <?php
 
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 $userId = $_SESSION["id"];
-//TODO: why $link from include not working???
-// include "./connect-database.php";
-
-//manually connect to database instead
-include "../properties.php"; //import database properties from secured file
-$link = mysqli_connect($host, $username, $password, $database);
-if (mysqli_connect_error()) {
-    die("Failed to connect to database<br>");
-} else {
-    // echo "Connect to database successfully<br>";
-}
+include "connect-database.php";
 
 $query = "SELECT * FROM note WHERE userId=" . $userId
-    . " AND `title` LIKE '%" . $_POST["searchKeyword"] . "%'";
+    . " AND `title` LIKE '%" . $_POST["searchKeyword"] . "%' ORDER BY `id` DESC";
 
 $result = mysqli_query($link, $query);
 
@@ -38,7 +31,7 @@ if ($result) {
         }
 
         $selectState =" ";
-        if ($row["id"] == $_SESSION["currentNoteId"]) {
+        if ($_SESSION["currentNoteId"] and $row["id"] == $_SESSION["currentNoteId"]) {
             $selectState = " selected";}
 
          echo

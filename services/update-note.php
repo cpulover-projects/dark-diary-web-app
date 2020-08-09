@@ -1,17 +1,10 @@
 <?php
 
-session_start();
-//TODO: why $link from include not working???
-// include "./connect-database.php";
-
-//manually connect to database instead
-include "../properties.php"; //import database properties from secured file
-$link = mysqli_connect($host, $username, $password, $database);
-if (mysqli_connect_error()) {
-    die("Failed to connect to database<br>");
-} else {
-    // echo "Connect to database successfully<br>";
-}
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+include "connect-database.php";
 
 if (isset($_POST)) {
     $title = mysqli_real_escape_string($link, $_POST["title"]);

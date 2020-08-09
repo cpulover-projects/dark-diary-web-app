@@ -1,6 +1,9 @@
 <?php
 
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 //hash password
 $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 

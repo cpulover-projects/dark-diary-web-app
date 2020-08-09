@@ -82,6 +82,7 @@ $(document).ajaxComplete(function() {
   });
 
 $('#content, #title, #date').bind('input propertychange', function () {
+    $("[data-toggle='popover']").popover('hide');
     var theDate = getCurrentDate();
     if($("#date").val()){
         var theDate = $("#date").val();
