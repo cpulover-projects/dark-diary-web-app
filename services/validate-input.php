@@ -63,13 +63,10 @@ if (isset($_POST["submit"])) {
                 // echo $error;
             } else {
                
-                if ($_POST["stayLoggedIn2"]) {
+                if (isset($_POST["stayLoggedIn2"])) {
                     setcookie("id", $accountId, time() + 60 * 60 * 60 * 24 * 30, "/");
                     // echo $_SESSION["id"];
                     // echo "cookie setting...: " . $_COOKIE["id"];
-                    if ($_COOKIE["id"]){
-                        // echo "cooke set";
-                    }
                 } else {
                     // echo "Not stay logged in";
                 }

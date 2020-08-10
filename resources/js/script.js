@@ -3,6 +3,24 @@ $(".toggleForms").click(function () {
     $("#signUpForm").toggle();
 });
 
+$(document).ready(function () {
+    $('#submit1').prop('disabled', true);
+    $('#submit2').prop('disabled', true);
+
+});
+
+$('#email1, #password1, #passwordConfirm, #email2, #password2').bind('input propertychange', function () {
+    if ($('#email1').val() && $('#password1').val() && $('#passwordConfirm').val()) {
+        $('#submit1').prop('disabled', false);
+    } else {
+        $('#submit1').prop('disabled', true);
+    }
+    if ($('#email2').val() && $('#password2').val()) {
+        $('#submit2').prop('disabled', false);
+    } else {
+        $('#submit2').prop('disabled', true);
+    }
+});
 
 $("#menu-toggle").click(function (e) {
     e.preventDefault();

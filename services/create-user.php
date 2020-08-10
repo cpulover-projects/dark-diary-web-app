@@ -15,7 +15,7 @@ $query = "INSERT INTO `user` (`email`, `password`) VALUES ('"
     . "')";
 
 if (mysqli_query($link, $query)) { 
-    if ($_POST["stayLoggedIn1"]) {
+    if (isset($_POST["stayLoggedIn1"])) {
         setcookie("id", mysqli_insert_id($link), time() + 60*60*24*30, "/");
         // echo($_SESSION["id"]);
         // echo "<h1> cookie set: ".$_COOKIE["id"]."</h1>";

@@ -35,7 +35,7 @@ include "services/validate-input.php";
                     <input type="checkbox" name="stayLoggedIn1" id="stayLoggedIn1">
                     <label for="stayLoggedIn1">Remember me</label>
                 </div>
-                <input type="submit" name="submit" class="btn btn-success" value="Sign up">
+                <input type="submit" id="submit1" name="submit" class="btn btn-success" value="Sign up">
 
                 <!-- Create hidden field to distinguish between sign up and sign in -->
                 <input type="hidden" name="signUp" value="1">
@@ -59,7 +59,7 @@ include "services/validate-input.php";
                     <label for="stayLoggedIn2">Remember me</label>
                 </div>
 
-                <input type="submit" name="submit" class="btn btn-primary" value="Sign in">
+                <input type="submit" id="submit2" name="submit" class="btn btn-primary" value="Sign in">
 
                 <!-- Create hidden field to distinguish between sign up and sign in -->
                 <input type="hidden" name="signIn" value="1">

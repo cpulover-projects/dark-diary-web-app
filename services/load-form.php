@@ -16,14 +16,20 @@ if ($_SESSION["currentNoteId"]) {
 ?>
 
 
-
 <form method="post">
   <div class="form-group note-form">
     <input type="text" name="title" id="title" class="form-control note-form border-0" placeholder="Title"
       value="<?php echo $currentNote["title"] ?>">
     <hr>
-    <input type="date" name="date" id="date" class="form-control note-form border-0"
-      value="<?php echo $currentNote['date'];?>">
+    <div class="row">
+      <div class="col-5">
+      <input type="date" name="date" id="date" class="form-control note-form border-0"
+        value="<?php echo $currentNote['date'];?>">
+        </div>
+        <div class="col">
+          <input type="text" name="wordCount" id="wordCount" class="form-control note-form border-0" disabled >
+        </div>
+    </div>
     <hr>
     <textarea name="content" id="content" rows="16" placeholder="Content"
       class="form-control bg-light"><?php echo $currentNote["content"] ?></textarea>
@@ -37,7 +43,6 @@ if ($_SESSION["currentNoteId"]) {
     width: "100%",
     height: "300px",
     filebrowserUploadUrl: "/the-dark-diary/ckeditor2/ck_upload.php",
-    filebrowserUploadMethod:"form",
-  });  
-
+    filebrowserUploadMethod: "form",
+  });
 </script>
