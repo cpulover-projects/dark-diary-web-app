@@ -8,6 +8,10 @@ if(!isset($_SESSION))
 $userId = $_SESSION["id"];
 include "connect-database.php";
 
+if(!isset($_POST["searchKeyword"])){
+    $_POST["searchKeyword"]="";
+}
+
 $query = "SELECT * FROM note WHERE userId=" . $userId
     . " AND `title` LIKE '%" . $_POST["searchKeyword"] . "%' ORDER BY `id` DESC";
 

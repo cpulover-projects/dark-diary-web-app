@@ -25,37 +25,6 @@ $userId = $_SESSION["id"];
   html {
     background: none;
   }
-
-  .hidden {
-    display: none;
-  }
-
-  .form-control {
-    border: 0 !important;
-    /* border-bottom: gray 1px solid !important; */
-    border-radius: 0;
-    /* background-color: rgb(215, 215, 215) !important; */
-    background-color: white !important;
-  }
-
-  #title {
-    font-size: 25px;
-    font-weight: bold;
-  }
-
-  .form-group {
-    margin-top: 18px;
-  }
-
-  button.delete, button.star {
-    width: 40px;
-    /* border-radius: 100%; */
-    margin-bottom: 2px;
-    position: relative;
-    left: 10px;
-    /* float: right; */
-    /* color: white; */
-  }
 </style>
 
 
@@ -109,5 +78,5 @@ $userId = $_SESSION["id"];
 </div>
 <!-- /#wrapper -->
 
-
 <?php include "sections/script-entries.php";?>
+

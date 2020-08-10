@@ -9,14 +9,6 @@ $("#menu-toggle").click(function (e) {
     $("#wrapper").toggleClass("toggled");
 });
 
-// $(".list-group-item").hover(function () {
-    
-//     $(this).attr('style', function (i, s) {
-//         return (s || '') +
-//             'background-color: lightgrey !important;'
-//     });
-//     // alert($(this).attr("id"));
-// });
 
 $(document).on('mouseover', '.list-group-item', function() {
     
@@ -28,13 +20,6 @@ $(document).on('mouseover', '.list-group-item', function() {
 });
 
 // //TODO: refactor
-// $(".list-group-item").mouseleave(function () {
-//     $(this).attr('style', function (i, s) {
-//         return (s || '') +
-//             'background-color: #F8F9FA !important;'
-//     });
-// })
-
 $(document).on('mouseleave', '.list-group-item', function() {
     if(!$(this).hasClass("selected")){
     $(this).attr('style', function (i, s) {
@@ -64,7 +49,8 @@ $(document).on('click', '.list-group-item', function(e) {
     // alert(noteTitle);
     $("#title").val(noteTitle);
     $("#date").val(noteDate);
-    $("#content").val(noteContent);
+    CKEDITOR.instances.content.setData(noteContent);
+    // $("#content").val(noteContent);
     $.ajax({
         method: "POST",
         url: "services/update-note.php",
@@ -88,7 +74,17 @@ $(document).ajaxComplete(function() {
     $('[data-toggle="popover"]').popover();
   });
 
-$('#content, #title, #date').bind('input propertychange', function () {
+
+
+$(' #title, #date').bind('input propertychange', function () {
+});
+
+CKEDITOR.instances.content.on('change', function() { 
+    updateNote(); 
+
+});
+
+function updateNote(){
     $("[data-toggle='popover']").popover('hide');
     var theDate = getCurrentDate();
     if($("#date").val()){
@@ -101,7 +97,8 @@ $('#content, #title, #date').bind('input propertychange', function () {
         data: {
             title: $("#title").val(),
             date: theDate,//$("#date").val(),
-            content: $("#content").val()
+            content: CKEDITOR.instances.content.getData()
+
         }
     }).done(function (msg) {
         ajaxLoadSidebarNote();
@@ -109,8 +106,7 @@ $('#content, #title, #date').bind('input propertychange', function () {
     }).fail(function () {
         console.error("Could not save note automatically");
     });  
-    
-});
+}
 
 function getCurrentDate(){
 var today = new Date();
@@ -174,3 +170,7 @@ $('#addNote').click(function(){
     })
 });
 
+$('.star').click(function(){
+    console.log("Star pressed");
+    console.log($('#richTextField').contents().find("body").html());
+});

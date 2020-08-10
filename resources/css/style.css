@@ -10,8 +10,6 @@ html {
     background: none;
   }
 
-  
-
   .container {
     color: white;
     text-align: center;
@@ -120,4 +118,52 @@ html {
   }
 
   /* PAGE CONTENT */
+  textarea:focus, input:focus{
+    outline: none;
+}
+
+textarea:focus, input:focus{
+  -webkit-appearance:none;
+  box-shadow: none !important;
+  background-color: #F0F0F0 !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.form-control .note-form {
+  border: 0 !important;
+  /* border-bottom: gray 1px solid !important; */
+  border-radius: 0;
+  /* background-color: rgb(215, 215, 215) !important; */
+  background-color: white !important;
+}
+
+#title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.form-group .note-form {
+  margin-top: 18px;
+}
+
+button.delete, button.star {
+  width: 40px;
+  /* border-radius: 100%; */
+  
+  position: relative;
+  left: 10px;
+  /* float: right; */
+  /* color: white; */
+}
+
+button.star {
+  margin-bottom: 4px;
+}
+
+iframe {
+  border: none;
+}
 

@@ -3,8 +3,6 @@
   - Right topbar
   - Mobile responsive
   - Fixed sidebar
-- Could not display PHP errors on the browser properly
-- Could not link database connection service
 - Prevent parsing html code
 
 # Notes - Tips
@@ -37,3 +35,4 @@
 ```
 - Use absolute path to include php file in parent directory in webserver: ```include "/home/sites/11a/2/2148d4b421/public_html/the-dark-diary/properties.php"; //import database properties from secured file```
 - Select elements other than this: ```$("<class>").not(this)```
+- Access PHP variable in JavaScript 

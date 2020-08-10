@@ -15,15 +15,26 @@ if ($_SESSION["currentNoteId"]) {
 }
 ?>
 
- <form method="post">
- <div class="form-group">
-   <input type="text" name="title" id="title" class="form-control bg-light" placeholder="Title"
-     value="<?php echo $currentNote["title"] ?>">
-   <hr>
-   <input type="date" name="date" id="date" class="form-control bg-light" 
-   value="<?php echo $currentNote['date'];?>">
-   <hr>
-   <textarea name="content" id="content" rows="16" placeholder="Content"
-     class="form-control bg-light"><?php echo $currentNote["content"] ?></textarea>
- </div>
+<form method="post">
+  <div class="form-group note-form">
+    <input type="text" name="title" id="title" class="form-control bg-light note-form" placeholder="Title"
+      value="<?php echo $currentNote["title"] ?>">
+    <hr>
+    <input type="date" name="date" id="date" class="form-control bg-light note-form"
+      value="<?php echo $currentNote['date'];?>">
+    <hr>
+    <textarea name="content" id="content" rows="16" placeholder="Content"
+      class="form-control bg-light"><?php echo $currentNote["content"] ?></textarea>
+
+  </div>
 </form>
+
+<script src="ckeditor/ckeditor.js?<?php echo time(); ?>"></script>
+
+<script type="text/javascript">
+  CKEDITOR.replace('content', {
+    width: "100%",
+    height: "300px"
+  });  
+
+</script>
