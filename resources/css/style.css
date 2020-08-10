@@ -26,9 +26,6 @@ html {
     font-size: 31px;
   }
 
-  .form-control {
-      /* width: 450px; */
-  }
 
   #signInForm {
       display: none;
@@ -119,11 +116,11 @@ html {
   }
 
   /* PAGE CONTENT */
-  textarea:focus, input:focus{
+  textarea:focus, input.note-form:focus{
     outline: none;
 }
 
-textarea:focus, input:focus{
+textarea:focus, input.note-form:focus{
   -webkit-appearance:none;
   box-shadow: none !important;
   background-color: #F0F0F0 !important;

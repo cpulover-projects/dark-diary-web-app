@@ -11,6 +11,14 @@
 # Notes - Tips
 - Create hidden fields in the forms to distinguish between signing up and signing in
 - Hash password when signing up
+- Set cookie before setting session and output
+- Reserve an a blank line to make cookie works in webserver 
+```
+<?php
+
+//code starts from here...
+?>
+```
 - Use ```isset()``` to check availability of a key
 - Add important style using jQuery: ```attr('style', function(i,s) { return (s || '') + 'background-color: aquamarine !important;' });```
 - Select child element of "this" with jQuery: ```$(this).find('<element>')```
@@ -29,13 +37,7 @@
     } 
 ?>
 ```
-- Reserve an a blank line to make cookie works in webserver 
-```
-<?php
 
-//code starts from here...
-?>
-```
 - Use absolute path to include php file in parent directory in webserver: ```include "/home/sites/11a/2/2148d4b421/public_html/the-dark-diary/properties.php"; //import database properties from secured file```
 - Select elements other than this: ```$("<class>").not(this)```
 - Access PHP variable in JavaScript 

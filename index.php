@@ -21,10 +21,10 @@ include "services/validate-input.php";
         <div id="signUpForm">
             <form action="" method="post">
                 <div class="form-group">
-                    <input type="email" name="email" id="email" placeholder="Enter email" class="form-control">
+                    <input type="email" name="email" id="email1" placeholder="Enter email" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" id="password" placeholder="Enter password"
+                    <input type="password" name="password" id="password1" placeholder="Enter password"
                         class="form-control">
                 </div>
                 <div class="form-group">
@@ -32,8 +32,8 @@ include "services/validate-input.php";
                         class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" name="stayLoggedIn" id="stayLoggedIn">
-                    <label for="stayLoggedIn">Remember me</label>
+                    <input type="checkbox" name="stayLoggedIn1" id="stayLoggedIn1">
+                    <label for="stayLoggedIn1">Remember me</label>
                 </div>
                 <input type="submit" name="submit" class="btn btn-success" value="Sign up">
 
@@ -48,15 +48,15 @@ include "services/validate-input.php";
         <div id="signInForm">
             <form action="" method="post">
                 <div class="form-group">
-                    <input type="email" name="email" id="email" placeholder="Enter email" class="form-control">
+                    <input type="email" name="email" id="email2" placeholder="Enter email" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" id="password" placeholder="Enter password"
+                    <input type="password" name="password" id="password2" placeholder="Enter password"
                         class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" name="stayLoggedIn" id="stayLoggedIn">
-                    <label for="stayLoggedIn">Remember me</label>
+                    <input type="checkbox" name="stayLoggedIn2" id="stayLoggedIn2">
+                    <label for="stayLoggedIn2">Remember me</label>
                 </div>
 
                 <input type="submit" name="submit" class="btn btn-primary" value="Sign in">

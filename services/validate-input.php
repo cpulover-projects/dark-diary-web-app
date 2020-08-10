@@ -1,9 +1,8 @@
 <?php
 
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+if (!isset($_SESSION)) {
+    session_start();
+}
 if (isset($_POST["submit"])) {
     $error = "";
 
@@ -20,13 +19,13 @@ if (isset($_POST["submit"])) {
     }
 
     if ($error) {
-        echo $error;
+        // echo $error;
     }
     //validate from database data
     else {
         $query = "SELECT * FROM `user`";
         $result = mysqli_query($link, $query);
-        if ($_POST["signUp"]) {
+        if (isset($_POST["signUp"])) {
             //authenticate the sign-up email not been registerd yet
             $emailExisted = false;
 
@@ -41,7 +40,7 @@ if (isset($_POST["submit"])) {
 
             if ($emailExisted) {
                 $error .= "This email is already registered";
-                echo $error;
+                // echo $error;
             } else {
                 include "services/create-user.php";
             }
@@ -61,13 +60,20 @@ if (isset($_POST["submit"])) {
 
             if (!$accountFound) {
                 $error .= "Email or password is wrong";
-                echo $error;
+                // echo $error;
             } else {
-                $_SESSION["id"] = $accountId;
-                if ($_POST["stayLoggedIn"]) {
-
-                    setcookie("id", $_SESSION["id"], time() + 60 * 60*60*24*30, "/");
+               
+                if ($_POST["stayLoggedIn2"]) {
+                    setcookie("id", $accountId, time() + 60 * 60 * 60 * 24 * 30, "/");
+                    // echo $_SESSION["id"];
+                    // echo "cookie setting...: " . $_COOKIE["id"];
+                    if ($_COOKIE["id"]){
+                        // echo "cooke set";
+                    }
+                } else {
+                    // echo "Not stay logged in";
                 }
+                $_SESSION["id"] = $accountId;
                 header("Location: main-page.php");
             }
         }
