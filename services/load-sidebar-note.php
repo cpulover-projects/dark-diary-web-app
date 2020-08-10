@@ -28,10 +28,13 @@ if ($result) {
             $titleSummary = $row["title"];
         }
 
-        if (strlen($row["content"]) > $maxContentLetters) {
-            $contentSummary = substr($row["content"], 0, $maxContentLetters) . "...";
+        //strip all the HTML tags from the original content
+        $strippedContent = strip_tags($row["content"]);
+
+        if (strlen($strippedContent) > $maxContentLetters) {
+            $contentSummary = substr($strippedContent, 0, $maxContentLetters) . "...";
         } else {
-            $contentSummary = $row["content"];
+            $contentSummary = $strippedContent;
         }
 
         $selectState =" ";

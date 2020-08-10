@@ -17,15 +17,14 @@ if ($_SESSION["currentNoteId"]) {
 
 <form method="post">
   <div class="form-group note-form">
-    <input type="text" name="title" id="title" class="form-control bg-light note-form" placeholder="Title"
+    <input type="text" name="title" id="title" class="form-control note-form border-0" placeholder="Title"
       value="<?php echo $currentNote["title"] ?>">
     <hr>
-    <input type="date" name="date" id="date" class="form-control bg-light note-form"
+    <input type="date" name="date" id="date" class="form-control note-form border-0"
       value="<?php echo $currentNote['date'];?>">
     <hr>
     <textarea name="content" id="content" rows="16" placeholder="Content"
       class="form-control bg-light"><?php echo $currentNote["content"] ?></textarea>
-
   </div>
 </form>
 

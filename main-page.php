@@ -46,8 +46,8 @@ $userId = $_SESSION["id"];
   <div id="page-content-wrapper">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-      <button class="btn btn-success mr-1" id="menu-toggle">My notes</button>
-      <button class="btn btn-success" id="addNote">New note</button>
+      <button class="btn btn-light mr-2" id="menu-toggle">My notes</button>
+      <button class="btn btn-light" id="addNote">New note</button>
 
       <!-- ??? -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

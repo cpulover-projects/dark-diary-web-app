@@ -42,7 +42,7 @@ html {
 
 #sidebar-wrapper {
   /* background-color: aqua !important; */
-  border-right: gray 1px solid !important;
+  /* border-right: gray 1px solid !important; */
 }
 
 /* SIDE BAR */
@@ -68,7 +68,8 @@ html {
 }
 
 .sidebar-heading{
-  border-bottom: gray 1px solid !important;
+  /* border-bottom: gray 1px solid !important; */
+  background-color: #F0F0F0 !important;
 
 }
   #wrapper {
