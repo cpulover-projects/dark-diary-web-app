@@ -76,6 +76,7 @@ $(document).on('click', '.list-group-item', function (e) {
         $("#title").val(noteTitle);
         $("#date").val(noteDate);
         CKEDITOR.instances.content.setData(noteContent);
+        countWord(CKEDITOR.instances.content.getData());
     });
 });
 
@@ -97,8 +98,40 @@ $('#title, #date').bind('input propertychange', function () {
 
 CKEDITOR.instances.content.on('change', function () {
     // console.log(">>> content changed...")
-    updateNote();
+    var contentField = CKEDITOR.instances.content.getData();
+    if (contentField == "" && $('#title').val() == "" && $('#date').val() == "") {
+        //when delete current note, no update
+    } else {
+        updateNote();
+    }
+    countWord(contentField);
 });
+
+
+/**
+ * Returns the text from a HTML string
+ * 
+ * @param {html} String The html string
+ */
+function stripHtml(html) {
+    // Create a new div element
+    var temporalDivElement = document.createElement("div");
+    // Set the HTML content with the providen
+    temporalDivElement.innerHTML = html;
+    // Retrieve the text property of the element (cross-browser support)
+    return temporalDivElement.textContent || temporalDivElement.innerText || "";
+}
+
+function countWord(field) {
+    var str = stripHtml(field);
+    var fieldLength = str.split(' ')
+        .filter(function (n) {
+            return n != ''
+        })
+        .length;
+    $('#wordCount').val(fieldLength + " word(s)");
+    // $('#wordCount').val(str);
+}
 
 function updateNote() {
     $("[data-toggle='popover']").popover('hide');
@@ -168,7 +201,8 @@ $(document).on('click', 'button.delete', function (e) {
         if (msg) {
             $("#title").val("");
             $("#date").val("");
-            $("#content").val("");
+            CKEDITOR.instances.content.setData("");
+            // $("#countWord").val("");
         }
     })
 });
