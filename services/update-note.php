@@ -1,9 +1,8 @@
 <?php
 
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+if (!isset($_SESSION)) {
+    session_start();
+}
 include "connect-database.php";
 
 if (isset($_POST)) {
@@ -12,13 +11,16 @@ if (isset($_POST)) {
     $content = mysqli_real_escape_string($link, $_POST["content"]);
     $userId = $_SESSION["id"];
 
-    echo $title.$date.$content;
+    // echo $title.$date.$content;
 
-    if($_POST["selectedNoteId"]){
-        $_SESSION["currentNoteId"]=$_POST["selectedNoteId"];
+    if ($_POST["selectedNoteId"]) {
+        $_SESSION["currentNoteId"] = $_POST["selectedNoteId"];
+        exit('');
     }
 
+    // echo "currentId: ".$_SESSION["currentNoteId"]." selectedId: ".$_POST["selectedNoteId"];
     if (!$_SESSION["currentNoteId"]) {
+        // echo ">>> Inserting...";
         $insertQuery = "INSERT INTO note (`title`, `content`, `date`, `userId`) VALUES ('"
             . $title . "','"
             . $content . "','"
@@ -33,15 +35,16 @@ if (isset($_POST)) {
         }
         ;
     } else {
-        echo "current note: ".$_SESSION["currentNoteId"];
-        $updateQuery = "UPDATE note SET `title` ='".$title
-                        ."', `content` ='".$content
-                        ."', `date` ='".$date
-                        ."' WHERE id =".$_SESSION["currentNoteId"];
-        if(mysqli_query($link, $updateQuery)){
+        // echo ">>> Updating...";
+        $updateQuery = "UPDATE note SET `title` ='" . $title
+            . "', `content` ='" . $content
+            . "', `date` ='" . $date
+            . "' WHERE id =" . $_SESSION["currentNoteId"];
+        if (mysqli_query($link, $updateQuery)) {
             // echo "Update successfully";
-        } else{
+        } else {
             echo "Failed to update";
-        };
+        }
+        ;
     }
 }

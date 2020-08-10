@@ -10,8 +10,8 @@ $("#menu-toggle").click(function (e) {
 });
 
 
-$(document).on('mouseover', '.list-group-item', function() {
-    
+$(document).on('mouseover', '.list-group-item', function () {
+
 
     $(this).attr('style', function (i, s) {
         return (s || '') +
@@ -20,21 +20,18 @@ $(document).on('mouseover', '.list-group-item', function() {
 });
 
 // //TODO: refactor
-$(document).on('mouseleave', '.list-group-item', function() {
-    if(!$(this).hasClass("selected")){
-    $(this).attr('style', function (i, s) {
-        return (s || '') +
-            'background-color: #F8F9FA !important;'
-    });}
+$(document).on('mouseleave', '.list-group-item', function () {
+    if (!$(this).hasClass("selected")) {
+        $(this).attr('style', function (i, s) {
+            return (s || '') +
+                'background-color: #F8F9FA !important;'
+        });
+    }
 });
 
 
-$(document).on('click', '.list-group-item', function(e) {
-    //target only on this element, not on the childrens
-    // if(e.target !== e.currentTarget) return;
-
-    // if(e.target == $("#delete")) return;
-
+$(document).on('click', '.list-group-item', function (e) {
+    $("[data-toggle='popover']").popover('hide');
     $('.list-group-item').not(this).removeClass("selected");
     $('.list-group-item').not(this).attr('style', function (i, s) {
         return (s || '') +
@@ -42,15 +39,11 @@ $(document).on('click', '.list-group-item', function(e) {
     });
     $(this).addClass("selected");
 
-
     var noteTitle = $(this).find('#fullTitle').html();
     var noteDate = $(this).find('#fullDate').html();
     var noteContent = $(this).find('#fullContent').html();
     // alert(noteTitle);
-    $("#title").val(noteTitle);
-    $("#date").val(noteDate);
-    CKEDITOR.instances.content.setData(noteContent);
-    // $("#content").val(noteContent);
+
     $.ajax({
         method: "POST",
         url: "services/update-note.php",
@@ -60,9 +53,12 @@ $(document).on('click', '.list-group-item', function(e) {
             date: noteDate,
             content: noteContent
         }
-    }).done(function (msg){
-
-    })
+    }).done(function (msg) {
+        console.log(msg);
+        $("#title").val(noteTitle);
+        $("#date").val(noteDate);
+        CKEDITOR.instances.content.setData(noteContent);
+    });
 });
 
 
@@ -70,24 +66,27 @@ $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
 });
 
-$(document).ajaxComplete(function() {
+$(document).ajaxComplete(function () {
     $('[data-toggle="popover"]').popover();
-  });
-
-
-
-$(' #title, #date').bind('input propertychange', function () {
 });
 
-CKEDITOR.instances.content.on('change', function() { 
-    updateNote(); 
 
+
+$('#title, #date').bind('input propertychange', function () {
+    console.log("title or date changed..")
+    updateNote();
 });
 
-function updateNote(){
+CKEDITOR.instances.content.on('change', function () {
+
+    console.log(">>> content changed...")
+    updateNote();
+});
+
+function updateNote() {
     $("[data-toggle='popover']").popover('hide');
     var theDate = getCurrentDate();
-    if($("#date").val()){
+    if ($("#date").val()) {
         var theDate = $("#date").val();
     }
 
@@ -96,39 +95,39 @@ function updateNote(){
         url: "services/update-note.php",
         data: {
             title: $("#title").val(),
-            date: theDate,//$("#date").val(),
-            content: CKEDITOR.instances.content.getData()
+            date: theDate, //$("#date").val(),
+            content: CKEDITOR.instances.content.getData(),
 
         }
     }).done(function (msg) {
         ajaxLoadSidebarNote();
-        // alert(msg);
+        console.log(msg);
     }).fail(function () {
         console.error("Could not save note automatically");
-    });  
+    });
 }
 
-function getCurrentDate(){
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
+function getCurrentDate() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
 
-return today = yyyy + '/' + mm + '/' + dd;
+    return today = yyyy + '/' + mm + '/' + dd;
 };
 
 $('#search').bind('input propertychange', function () {
     ajaxLoadSidebarNote();
 });
 
-function ajaxLoadSidebarNote(){
+function ajaxLoadSidebarNote() {
     $.ajax({
         method: "POST",
         url: "services/load-sidebar-note.php",
         data: {
             searchKeyword: $("#search").val()
-        }    
-    }).done(function(msg){
+        }
+    }).done(function (msg) {
         // alert(msg);
         $(".list-group").html(msg);
     })
@@ -136,7 +135,7 @@ function ajaxLoadSidebarNote(){
 
 
 
-$(document).on('click', 'button.delete', function(e) {
+$(document).on('click', 'button.delete', function (e) {
     e.stopPropagation();
 
     $(this).parent().parent().parent().parent().css("display", "none");
@@ -145,32 +144,31 @@ $(document).on('click', 'button.delete', function(e) {
         method: "POST",
         url: "services/delete-note.php",
         data: {
-            noteId:  $(this).parent().parent().parent().parent().attr("id")
+            noteId: $(this).parent().parent().parent().parent().attr("id")
         }
-    }).done(function (msg){
+    }).done(function (msg) {
         //if the deleted note is the current note => reset form
-        if(msg){
-        $("#title").val("");
-        $("#date").val("");
-        $("#content").val("");
+        if (msg) {
+            $("#title").val("");
+            $("#date").val("");
+            $("#content").val("");
         }
     })
 });
 
-$('#addNote').click(function(){
+$('#addNote').click(function () {
     $.ajax({
         method: "POST",
         url: "services/add-new-note.php"
-    }).done(function (){
+    }).done(function () {
         $("#title").val("");
         $("#date").val("");
-        $("#content").val("");
+        CKEDITOR.instances.content.setData("");
 
         //ajaxLoadForm();
     })
 });
 
-$('.star').click(function(){
-    console.log("Star pressed");
-    console.log($('#richTextField').contents().find("body").html());
+$('.star').click(function () {
+
 });
