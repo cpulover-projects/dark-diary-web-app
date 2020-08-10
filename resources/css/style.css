@@ -165,3 +165,7 @@ iframe {
   border: none;
 }
 
+input[type="text"]:disabled {
+  background: #ffffff !important;
+  text-align: end;
+}
