@@ -13,9 +13,9 @@ if (isset($_POST["submit"])) {
     }
     if (!$_POST["password"]) {
         $error .= "Password is required";
-    } elseif ($_POST["signUp"] and !$_POST["passwordConfirm"]) {
+    } elseif (isset($_POST["signUp"]) and !$_POST["passwordConfirm"]) {
         $error .= "Please comfirm password";
-    } elseif ($_POST["signUp"] and $_POST["password"] != $_POST["passwordConfirm"]) {
+    } elseif (isset($_POST["signUp"]) and $_POST["password"] != $_POST["passwordConfirm"]) {
         $error .= "Password does not match";
     }
 

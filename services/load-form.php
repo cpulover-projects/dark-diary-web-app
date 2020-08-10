@@ -15,6 +15,8 @@ if ($_SESSION["currentNoteId"]) {
 }
 ?>
 
+
+
 <form method="post">
   <div class="form-group note-form">
     <input type="text" name="title" id="title" class="form-control note-form border-0" placeholder="Title"
@@ -28,12 +30,14 @@ if ($_SESSION["currentNoteId"]) {
   </div>
 </form>
 
-<script src="ckeditor/ckeditor.js?<?php echo time(); ?>"></script>
+<script src="ckeditor2/ckeditor.js?<?php echo time(); ?>"></script>
 
 <script type="text/javascript">
   CKEDITOR.replace('content', {
     width: "100%",
-    height: "300px"
+    height: "300px",
+    filebrowserUploadUrl: "/the-dark-diary/ckeditor2/ck_upload.php",
+    filebrowserUploadMethod:"form",
   });  
 
 </script>

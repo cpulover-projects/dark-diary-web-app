@@ -54,7 +54,7 @@ $(document).on('click', '.list-group-item', function (e) {
             content: noteContent
         }
     }).done(function (msg) {
-        console.log(msg);
+        // console.log(msg);
         $("#title").val(noteTitle);
         $("#date").val(noteDate);
         CKEDITOR.instances.content.setData(noteContent);
@@ -73,13 +73,12 @@ $(document).ajaxComplete(function () {
 
 
 $('#title, #date').bind('input propertychange', function () {
-    console.log("title or date changed..")
+    // console.log("title or date changed..")
     updateNote();
 });
 
 CKEDITOR.instances.content.on('change', function () {
-
-    console.log(">>> content changed...")
+    // console.log(">>> content changed...")
     updateNote();
 });
 
@@ -101,7 +100,7 @@ function updateNote() {
         }
     }).done(function (msg) {
         ajaxLoadSidebarNote();
-        console.log(msg);
+        // console.log(msg);
     }).fail(function () {
         console.error("Could not save note automatically");
     });

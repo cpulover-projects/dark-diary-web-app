@@ -3,7 +3,10 @@
   - Right topbar
   - Mobile responsive
   - Fixed sidebar
-- Prevent parsing html code
+  - Remember me checkbox
+- Prevent parsing html code (fixed)
+- Popover not working properly
+- Could not save image
 
 # Notes - Tips
 - Create hidden fields in the forms to distinguish between signing up and signing in

@@ -19,9 +19,9 @@ if (mysqli_query($link, $query)) {
     if ($_POST["stayLoggedIn"]) {
         setcookie("id", $_SESSION["id"], time() + 60*60*24*30, "/");
         echo($_SESSION["id"]);
-        echo "<h1> cookie set: ".$_COOKIE["id"]."</h1>";
+        // echo "<h1> cookie set: ".$_COOKIE["id"]."</h1>";
     } else {
-        echo "<h1> cookie not set: ".$_COOKIE["id"]."</h1>";
+        // echo "<h1> cookie not set: ".$_COOKIE["id"]."</h1>";
     }
     header("Location: main-page.php");
 } else {
