@@ -16,13 +16,7 @@ if (isset($_COOKIE["id"])) {
 
 if (!isset($_SESSION["id"]) && isset($_SESSION['access_token']) && $_SESSION['access_token'] == '') {
     header("Location: index.php");
-} else {
-
-}
-
-?>
-
-<?php
+};
 
 //Include Google Configuration File
 include 'google-config.php';
@@ -60,18 +54,19 @@ if (isset($_GET["code"])) {
         if (!empty($data['email'])) {
             $_SESSION['email'] = $data['email'];
         }
+        header("Location: main-page.php");
     } 
 }; 
 
 if(isset($_SESSION['email'])){
-  include "services/create-user.php";
+  include "services/login-google.php";
+  // header("Location: main-page.php");
 }
 
 ?>
 
 <?php include "sections/head.php";?>
 
-<!-- TODO: include external css not working -->
 <style>
   html {
     background: none;
@@ -114,15 +109,11 @@ if(isset($_SESSION['email'])){
         </ul>
       </div>
     </nav>
-
     <script src="resources/js/script.js"></script>
-
     <div class="container-fluid">
       <!-- LOAD FORM -->
       <?php include "services/load-form.php";?>
-
     </div>
-
   </div>
   <!-- /#page-content-wrapper -->
 
