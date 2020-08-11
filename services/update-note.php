@@ -35,7 +35,7 @@ if (isset($_POST)) {
         }
         ;
     } else {
-        // echo ">>> Updating...";
+        echo $_SESSION["currentNoteId"];
         $updateQuery = "UPDATE note SET `title` ='" . $title
             . "', `content` ='" . $content
             . "', `date` ='" . $date

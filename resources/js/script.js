@@ -2,13 +2,11 @@ $(".toggleForms").click(function () {
     $("#signInForm").toggle();
     $("#signUpForm").toggle();
 });
-
 $(document).ready(function () {
     $('#submit1').prop('disabled', true);
     $('#submit2').prop('disabled', true);
 
 });
-
 $('#email1, #password1, #passwordConfirm, #email2, #password2').bind('input propertychange', function () {
     if ($('#email1').val() && $('#password1').val() && $('#passwordConfirm').val()) {
         $('#submit1').prop('disabled', false);
@@ -21,22 +19,16 @@ $('#email1, #password1, #passwordConfirm, #email2, #password2').bind('input prop
         $('#submit2').prop('disabled', true);
     }
 });
-
 $("#menu-toggle").click(function (e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
 });
-
-
 $(document).on('mouseover', '.list-group-item', function () {
-
-
     $(this).attr('style', function (i, s) {
         return (s || '') +
             'background-color: lightgrey !important;'
     });
 });
-
 // //TODO: refactor
 $(document).on('mouseleave', '.list-group-item', function () {
     if (!$(this).hasClass("selected")) {
@@ -46,8 +38,6 @@ $(document).on('mouseleave', '.list-group-item', function () {
         });
     }
 });
-
-
 $(document).on('click', '.list-group-item', function (e) {
     $("[data-toggle='popover']").popover('hide');
     $('.list-group-item').not(this).removeClass("selected");
@@ -61,7 +51,6 @@ $(document).on('click', '.list-group-item', function (e) {
     var noteDate = $(this).find('#fullDate').html();
     var noteContent = $(this).find('#fullContent').html();
     // alert(noteTitle);
-
     $.ajax({
         method: "POST",
         url: "services/update-note.php",
@@ -79,8 +68,6 @@ $(document).on('click', '.list-group-item', function (e) {
         countWord(CKEDITOR.instances.content.getData());
     });
 });
-
-
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
 });
@@ -134,10 +121,10 @@ function countWord(field) {
 }
 
 function updateNote() {
-    $("[data-toggle='popover']").popover('hide');
-    var theDate = getCurrentDate();
     if ($("#date").val()) {
         var theDate = $("#date").val();
+    } else {
+        var theDate = getCurrentDate();
     }
 
     $.ajax({
@@ -150,11 +137,34 @@ function updateNote() {
 
         }
     }).done(function (msg) {
-        ajaxLoadSidebarNote();
-        // console.log(msg);
+        if (msg) { //if editing an existing note
+            $("#" + msg).find("b").text(summarize('title', $("#title").val()));
+            $("#fullDate").text(theDate);
+            $("#" + msg).attr("data-original-title", $("#title").val());
+            $("#" + msg).attr("data-content", summarize('content', stripHtml(CKEDITOR.instances.content.getData())));
+        } else {
+            ajaxLoadSidebarNote();
+        }
     }).fail(function () {
         console.error("Could not save note automatically");
     });
+
+    $("[data-toggle='popover']").popover('hide');
+}
+
+function summarize(type, str) {
+    var maxSize;
+    if (type == 'title') {
+        maxSize = 18;
+    } else {
+        maxSize = 400;
+    }
+
+    if (str.length < maxSize) {
+        return str;
+    } else {
+        return str.substring(0, maxSize) + "...";
+    }
 }
 
 function getCurrentDate() {

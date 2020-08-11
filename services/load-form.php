@@ -36,7 +36,7 @@ if (isset($_SESSION["currentNoteId"])) {
   </div>
 </form>
 
-<script src="ckeditor2/ckeditor.js?<?php echo time(); ?>"></script>
+<script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
 
 <script type="text/javascript">
   CKEDITOR.replace('content', {

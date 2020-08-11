@@ -4,9 +4,9 @@
   - Mobile responsive
   - Fixed sidebar
   - Remember me checkbox
-- Prevent parsing html code (fixed)
+- Prevent parsing html code for title (fixed)
 - Popover not working properly
-- Could not save image
+- Slow speed with WordPress
 
 # Notes - Tips
 - Create hidden fields in the forms to distinguish between signing up and signing in
