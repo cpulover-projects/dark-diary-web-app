@@ -5,6 +5,7 @@ if (!isset($_SESSION)) {
 }
 
 include "services/connect-database.php";
+
 if (isset($_COOKIE["id"])) {
     $_SESSION["id"] = $_COOKIE["id"];
     $userId = $_SESSION["id"];
@@ -41,8 +42,6 @@ if (isset($_GET["code"])) {
     
     // echo "Token: " . $_SESSION['access_token'];
 
-
-
     //This condition will check there is any error occur during geting authentication token. If there is no any error occur then it will execute if block of code/
     if (!isset($token['error'])) {
         // echo "No error";
@@ -58,28 +57,15 @@ if (isset($_GET["code"])) {
         //Get user profile data from google
         $data = $google_service->userinfo->get();
 
-        //Below you can find Get profile data and store into $_SESSION variable
-        if (!empty($data['given_name'])) {
-            $_SESSION['user_first_name'] = $data['given_name'];
-        }
-
-        if (!empty($data['family_name'])) {
-            $_SESSION['user_last_name'] = $data['family_name'];
-        }
-
         if (!empty($data['email'])) {
             $_SESSION['email'] = $data['email'];
         }
-
-        if (!empty($data['gender'])) {
-            $_SESSION['user_gender'] = $data['gender'];
-        }
-
-        if (!empty($data['picture'])) {
-            $_SESSION['user_image'] = $data['picture'];
-        }
     } 
-} 
+}; 
+
+if(isset($_SESSION['email'])){
+  include "services/create-user.php";
+}
 
 ?>
 
