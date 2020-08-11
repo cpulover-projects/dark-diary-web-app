@@ -1,19 +1,34 @@
 <?php
 
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+if (!isset($_SESSION)) {
+    session_start();
+}
 include "services/connect-database.php";
 include "services/logout.php";
 include "services/validate-input.php";
+//Include Google Configuration File
+include 'google-config.php';
+
+
+if (!isset($_SESSION['access_token'])) {
+    //Create a URL to obtain user authorization
+    // $google_login_btn = '<a href="' . $google_client->createAuthUrl() . '"><img id="google-login" src="https://www.tutsmake.com/wp-content/uploads/2019/12/google-login-image.png" /></a>';
+} else {
+
+    // header("Location: main-page.php");
+}
+
+$google_login_btn = '<a href="' . $google_client->createAuthUrl() . '"><img id="google-login" src="https://www.tutsmake.com/wp-content/uploads/2019/12/google-login-image.png" /></a>';
+
 
 ?>
 
 <?php include "sections/head.php";?>
+
+
     <div class="container">
         <div class="display-3 text-danger">The Dark Diary</div>
-        <div class="display-4">Keep your darkness <b>secrets</b> here</div>
+        <div class="display-4">Keep your darkest <b>secrets</b> here</div>
         <p><i>(I will not tell anyone!)</i></p>
         <br>
 
@@ -66,5 +81,15 @@ include "services/validate-input.php";
             </form>
             Don't have an account? <a class="toggleForms text-primary"> Sign up</a>
         </div>
+
+   <?php
+    echo '<div  id="google" align="center">'.$google_login_btn . '</div>';
+   ?>
     </div>
+
+
+
+
+
     <?php include "sections/script-entries.php";?>
+

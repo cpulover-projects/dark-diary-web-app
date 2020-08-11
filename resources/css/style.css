@@ -17,6 +17,11 @@ html {
     width: 500px;
   }
 
+img#google-login {
+  margin-top: 15px;
+  width: 190px !important;
+}
+
 
 .display-3 {
     font-weight: normal;

@@ -7,7 +7,7 @@ if(!isset($_SESSION))
 
 include "connect-database.php";
 
-if ($_SESSION["currentNoteId"]) {
+if (isset($_SESSION["currentNoteId"])) {
     $query = "SELECT * FROM note WHERE id=" . $_SESSION["currentNoteId"];
     $currentNote = mysqli_fetch_array(mysqli_query($link, $query));
 } else {

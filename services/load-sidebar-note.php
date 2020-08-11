@@ -1,16 +1,24 @@
-
 <?php
 
+include "connect-database.php";
 if(!isset($_SESSION)) 
 { 
     session_start(); 
 } 
+
+if(isset($_SESSION["id"])){
 $userId = $_SESSION["id"];
-include "connect-database.php";
+} else {
+    $userId=-1;
+}
 
 if(!isset($_POST["searchKeyword"])){
     $_POST["searchKeyword"]="";
 }
+
+// if(!isset($_SESSION["currentNoteId"])){
+//     $_SESSION["currentNoteId"]=-1;
+// }
 
 $query = "SELECT * FROM note WHERE userId=" . $userId
     . " AND `title` LIKE '%" . $_POST["searchKeyword"] . "%' ORDER BY `id` DESC";
@@ -38,7 +46,7 @@ if ($result) {
         }
 
         $selectState =" ";
-        if ($_SESSION["currentNoteId"] and $row["id"] == $_SESSION["currentNoteId"]) {
+        if (isset($_SESSION["currentNoteId"]) and $row["id"] == $_SESSION["currentNoteId"]) {
             $selectState = " selected";}
 
          echo
