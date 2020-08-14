@@ -3,6 +3,14 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+if (isset($_POST["selectedNoteId"])) {
+    $_SESSION["currentNoteId"] = $_POST["selectedNoteId"];
+    // echo ">>> Select note: ".$_POST["selectedNoteId"];
+    exit('');
+};
+
+
 include "connect-database.php";
 
 if (isset($_POST)) {
@@ -11,12 +19,6 @@ if (isset($_POST)) {
     $content = mysqli_real_escape_string($link, $_POST["content"]);
     $userId = $_SESSION["id"];
 
-    // echo $title.$date.$content;
-
-    if ($_POST["selectedNoteId"]) {
-        $_SESSION["currentNoteId"] = $_POST["selectedNoteId"];
-        exit('');
-    }
 
     // echo "currentId: ".$_SESSION["currentNoteId"]." selectedId: ".$_POST["selectedNoteId"];
     if (!$_SESSION["currentNoteId"]) {
@@ -41,7 +43,8 @@ if (isset($_POST)) {
             . "', `date` ='" . $date
             . "' WHERE id =" . $_SESSION["currentNoteId"];
         if (mysqli_query($link, $updateQuery)) {
-            // echo "Update successfully";
+            // echo "<br>Update successfully";
+            // echo "<br>Content: ".$content;
         } else {
             echo "Failed to update";
         }

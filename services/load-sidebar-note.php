@@ -16,10 +16,6 @@ if(!isset($_POST["searchKeyword"])){
     $_POST["searchKeyword"]="";
 }
 
-// if(!isset($_SESSION["currentNoteId"])){
-//     $_SESSION["currentNoteId"]=-1;
-// }
-
 $query = "SELECT * FROM note WHERE userId=" . $userId
     . " AND `title` LIKE '%" . $_POST["searchKeyword"] . "%' ORDER BY `id` DESC";
 

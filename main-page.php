@@ -110,10 +110,12 @@ if(isset($_SESSION['email'])){
       </div>
     </nav>
     <script src="resources/js/script.js"></script>
-    <div class="container-fluid">
+    <!-- <div class="container-fluid"> -->
+      <div id="form-container">
       <!-- LOAD FORM -->
       <?php include "services/load-form.php";?>
-    </div>
+      </div>
+    <!-- </div> -->
   </div>
   <!-- /#page-content-wrapper -->
 

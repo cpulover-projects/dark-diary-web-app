@@ -3,10 +3,8 @@
   - Right topbar
   - Mobile responsive
   - Fixed sidebar
-  - Remember me checkbox
-- Prevent parsing html code for title (fixed)
 - Popover not working properly
-- Slow speed with WordPress
+- HTML tags in title go wroooong
 
 # Notes - Tips
 - Create hidden fields in the forms to distinguish between signing up and signing in

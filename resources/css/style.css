@@ -6,6 +6,8 @@ html {
     background-size: cover;
   }
 
+
+
   body {
     background: none;
   }
@@ -15,6 +17,18 @@ html {
     text-align: center;
     margin-top: 7%;
     width: 500px;
+  }
+
+#page-content-wrapper {
+  background-color: rgb(255, 255, 255);
+  /* position: relative; */
+  /* text-align: center; */
+}
+
+  #form-container {
+    /* background-color: aquamarine !important; */
+    width: 90% !important;
+    margin: auto ;
   }
 
 img#google-login {

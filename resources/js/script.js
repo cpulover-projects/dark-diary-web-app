@@ -50,24 +50,24 @@ $(document).on('click', '.list-group-item', function (e) {
     var noteTitle = $(this).find('#fullTitle').html();
     var noteDate = $(this).find('#fullDate').html();
     var noteContent = $(this).find('#fullContent').html();
-    // alert(noteTitle);
+    //remove listener temporary to prevent updating note when selecting
+    CKEDITOR.instances.content.removeListener( 'change', handleChangeContent);
     $.ajax({
         method: "POST",
         url: "services/update-note.php",
         data: {
             selectedNoteId: $(this).attr("id"),
-            title: noteTitle,
-            date: noteDate,
-            content: noteContent
         }
     }).done(function (msg) {
-        // console.log(msg);
         $("#title").val(noteTitle);
         $("#date").val(noteDate);
         CKEDITOR.instances.content.setData(noteContent);
         countWord(CKEDITOR.instances.content.getData());
+        //add listener again
+        CKEDITOR.instances.content.on('change', handleChangeContent);
     });
 });
+
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
 });
@@ -76,24 +76,23 @@ $(document).ajaxComplete(function () {
     $('[data-toggle="popover"]').popover();
 });
 
-
-
 $('#title, #date').bind('input propertychange', function () {
     // console.log("title or date changed..")
     updateNote();
 });
 
-CKEDITOR.instances.content.on('change', function () {
-    // console.log(">>> content changed...")
+CKEDITOR.instances.content.on('change', handleChangeContent);
+
+function handleChangeContent(){
     var contentField = CKEDITOR.instances.content.getData();
     if (contentField == "" && $('#title').val() == "" && $('#date').val() == "") {
         //when delete current note, no update
     } else {
+        // console.log(">>> Updating note...");
         updateNote();
     }
     countWord(contentField);
-});
-
+}
 
 /**
  * Returns the text from a HTML string
@@ -126,6 +125,7 @@ function updateNote() {
     } else {
         var theDate = getCurrentDate();
     }
+    // console.log(CKEDITOR.instances.content.getData());
 
     $.ajax({
         method: "POST",
@@ -134,17 +134,23 @@ function updateNote() {
             title: $("#title").val(),
             date: theDate, //$("#date").val(),
             content: CKEDITOR.instances.content.getData(),
-
         }
     }).done(function (msg) {
-        if (msg) { //if editing an existing note
+        if (msg) { //if editing an existing note, just override its sidebar content
             $("#" + msg).find("b").text(summarize('title', $("#title").val()));
-            $("#fullDate").text(theDate);
             $("#" + msg).attr("data-original-title", $("#title").val());
             $("#" + msg).attr("data-content", summarize('content', stripHtml(CKEDITOR.instances.content.getData())));
-        } else {
+
+            $("#" + msg).find("#fulltitle").text($("#title").val());
+            $("#" + msg).find("#fullContent").html(CKEDITOR.instances.content.getData());
+            $("#" + msg).find("#fullDate").text(theDate);
+
+            console.log(msg);
+        } else { //else reload sidebar to add new note
             ajaxLoadSidebarNote();
         }
+
+        
     }).fail(function () {
         console.error("Could not save note automatically");
     });
@@ -193,8 +199,6 @@ function ajaxLoadSidebarNote() {
     })
 };
 
-
-
 $(document).on('click', 'button.delete', function (e) {
     e.stopPropagation();
 
@@ -225,8 +229,6 @@ $('#addNote').click(function () {
         $("#title").val("");
         $("#date").val("");
         CKEDITOR.instances.content.setData("");
-
-        //ajaxLoadForm();
     })
 });
 
