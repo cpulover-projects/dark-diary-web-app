@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
         session_start();
 }
 
-// include "services/connect-database.php";
+include "services/connect-database.php";
 
 if (isset($_SESSION["email"])) {
         $emailExisted = false;
