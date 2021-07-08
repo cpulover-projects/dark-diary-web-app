@@ -10,7 +10,7 @@ if (isset($_POST["selectedNoteId"])) {
         exit('');
 };
 
-// include "connect-database.php";
+include "connect-database.php";
 
 if (isset($_POST)) {
         $title = mysqli_real_escape_string($link, $_POST["title"]);

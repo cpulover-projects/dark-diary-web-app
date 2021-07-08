@@ -1,5 +1,5 @@
 <?php
-$propertyFile = 'properties.php';
+$propertyFile = '/properties.php';
 
 if (file_exists($propertyFile)) {
         include $propertyFile;
