@@ -6,9 +6,7 @@ if (!isset($_SESSION)) {
 include "services/connect-database.php";
 include "services/logout.php";
 include "services/validate-input.php";
-//Include Google Configuration File
 include 'google-config.php';
-
 
 if (!isset($_SESSION['access_token'])) {
         //Create a URL to obtain user authorization
@@ -24,7 +22,6 @@ $google_login_btn = '<a href="' . $google_client->createAuthUrl() . '"><img id="
 ?>
 
 <?php include "sections/head.php"; ?>
-
 
 <div class="container">
         <div class="display-3 text-danger">The Dark Diary</div>
@@ -83,9 +80,5 @@ $google_login_btn = '<a href="' . $google_client->createAuthUrl() . '"><img id="
         echo '<div  id="google" align="center">' . $google_login_btn . '</div>';
         ?>
 </div>
-
-
-
-
 
 <?php include "sections/script-entries.php"; ?>

@@ -18,15 +18,7 @@ if (!isset($_SESSION["id"]) && isset($_SESSION['access_token']) && $_SESSION['ac
         header("Location: index.php");
 };
 
-//Include Google Configuration File
 include 'google-config.php';
-
-// if (isset($_SESSION['access_token']) && $_SESSION['access_token'] == '') {
-//     // echo "No token";
-//     header("Location: index.php");
-// } else {
-//     // echo "Token: " . $_SESSION['access_token']."<br>";
-// }
 
 //This $_GET["code"] variable value received after user has login into their Google Account redirct to PHP script then this variable value has been received
 if (isset($_GET["code"])) {
