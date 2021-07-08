@@ -1,5 +1,6 @@
 <?php
-$propertyFile = '/properties.php';
+echo __DIR__;
+$propertyFile = __DIR__ . 'properties.php';
 
 if (file_exists($propertyFile)) {
         include $propertyFile;
