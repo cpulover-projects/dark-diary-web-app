@@ -1,6 +1,5 @@
 <?php
-echo __DIR__;
-$propertyFile = __DIR__ . 'properties.php';
+$propertyFile =  '/var/www/enginoobz/projects/the-dark-diary/properties.php';
 
 if (file_exists($propertyFile)) {
         include $propertyFile;
