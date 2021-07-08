@@ -8,7 +8,7 @@ if (file_exists($propertyFile)) {
 $link = mysqli_connect($host, $username, $password, $database);
 if (mysqli_connect_error()) {
         // echo $_SERVER['DOCUMENT_ROOT'];
-        die("Failed to connect to databasefrom base service<br>");
+        die("Failed to connect to database from base service<br>");
 } else {
         // echo "Connect to database successfully<br>";
 }
